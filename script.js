@@ -167,6 +167,8 @@ lastItemId = selectedItem.id;
     productLink.href = selectedItem.url;
     productLink.hidden = false;
 
+    randomButton.textContent = "別の作品を見る";
+
     product.classList.remove("fade-out");
   }, 250);
     randomButton.disabled = false;
@@ -203,6 +205,8 @@ resetButton.addEventListener("click", () => {
   message.textContent = "";
 
   productLink.hidden = true;
+
+  randomButton.textContent = "作品を探す";
 
    updateResultCount();
 });
