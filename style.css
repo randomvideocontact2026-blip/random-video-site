@@ -1,0 +1,414 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 48px 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #2f2922;
+  background: #eee5d6;
+}
+
+.container {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid #8d7c68;
+  background: #f7f0e5;
+}
+
+header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #8d7c68;
+}
+
+.site-name {
+  margin: 0 0 12px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: normal;
+}
+
+.product {
+  padding-top: 32px;
+}
+
+#productImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid #8d7c68;
+  background: #e4d7c3;
+}
+
+#title {
+  margin: 24px 0 8px;
+  font-size: 21px;
+  line-height: 1.6;
+}
+
+#price {
+  min-height: 24px;
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+button,
+#productLink {
+  padding: 11px 18px;
+  border: 1px solid #594d40;
+  border-radius: 0;
+  font: inherit;
+  color: #2f2922;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover,
+#productLink:hover {
+  color: #f7f0e5;
+  background: #594d40;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 24px 18px;
+  }
+
+  .buttons {
+    display: grid;
+  }
+
+  button,
+  #productLink {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.product {
+  transition: opacity 0.25s ease;
+}
+
+.product.fade-out {
+  opacity: 0;
+}
+
+button:disabled {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 16px;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .product img {
+    width: 100%;
+    height: auto;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  #title {
+    font-size: 20px;
+  }
+
+  button,
+  #productLink {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.genre-filter {
+  margin-bottom: 24px;
+}
+
+#genreSelect {
+  padding: 8px 12px;
+  font: inherit;
+}
+
+.price-filter {
+  margin-bottom: 24px;
+}
+
+#priceSelect {
+  padding: 8px 12px;
+  font: inherit;
+}
+
+#resetButton {
+  margin-bottom: 24px;
+  padding: 8px 16px;
+  font: inherit;
+}
+
+/* 年齢確認画面 */
+.age-gate {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid #8d7c68;
+  background: #f7f0e5;
+}
+
+.age-gate-content {
+  text-align: center;
+}
+
+.age-gate-site-name {
+  margin: 0 0 24px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+}
+
+.age-gate h1 {
+  margin-bottom: 28px;
+}
+
+.age-gate-content > p:not(.age-gate-site-name) {
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+
+.age-gate-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.age-gate-buttons a {
+  padding: 11px 18px;
+  border: 1px solid #594d40;
+  color: #2f2922;
+  background: transparent;
+  text-decoration: none;
+}
+
+.age-gate-buttons a:hover {
+  color: #f7f0e5;
+  background: #594d40;
+}
+
+@media (max-width: 600px) {
+  .age-gate {
+    width: 100%;
+    padding: 24px 18px;
+  }
+
+  .age-gate-buttons {
+    display: grid;
+  }
+
+  .age-gate-buttons button,
+  .age-gate-buttons a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* サイト説明 */
+.site-introduction {
+  margin: 24px 0 28px;
+}
+
+.site-introduction p {
+  margin: 0 0 12px;
+  line-height: 1.8;
+}
+
+.sample-notice {
+  padding: 12px 14px;
+  border-left: 3px solid #8d7c68;
+  background: #eee5d6;
+  font-size: 15px;
+}
+
+/* フッター */
+.site-footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid #8d7c68;
+  font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+}
+
+.footer-links a {
+  color: #2f2922;
+  text-underline-offset: 3px;
+}
+
+.footer-links a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.affiliate-notice {
+  margin: 20px 0 10px;
+  line-height: 1.7;
+}
+
+.copyright {
+  margin: 0;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+  .footer-links {
+    display: grid;
+    gap: 12px;
+  }
+}
+
+/* 固定ページ */
+.legal-page {
+  max-width: 900px;
+}
+
+.legal-content {
+  padding-top: 28px;
+}
+
+.legal-content h2 {
+  margin: 32px 0 14px;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content p {
+  margin: 0 0 16px;
+  line-height: 1.9;
+}
+
+.policy-date {
+  margin-top: 32px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.back-link {
+  margin: 40px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid #8d7c68;
+}
+
+.back-link a {
+  color: #2f2922;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .legal-content h2 {
+    font-size: 21px;
+  }
+
+  .policy-date {
+    text-align: left;
+  }
+}
+
+/* お問い合わせフォーム */
+.contact-form {
+  margin-top: 28px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #8d7c68;
+  border-radius: 0;
+  font: inherit;
+  color: #2f2922;
+  background: #fffaf2;
+}
+
+.form-group textarea {
+  resize: vertical;
+  line-height: 1.7;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 2px solid #8d7c68;
+  outline-offset: 2px;
+}
+
+.contact-form button:disabled {
+  opacity: 0.6;
+}
+
+/* お問い合わせ先 */
+.contact-information {
+  margin-top: 28px;
+  padding: 20px;
+  border-left: 3px solid #8d7c68;
+  background: #eee5d6;
+}
+
+.contact-information p {
+  margin: 0 0 12px;
+}
+
+.contact-information p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-email {
+  font-size: 18px;
+  overflow-wrap: anywhere;
+}
+
+.contact-email a {
+  color: #2f2922;
+  text-underline-offset: 3px;
+}
