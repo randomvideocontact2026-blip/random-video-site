@@ -51,7 +51,8 @@ h1 {
 
 button,
 #productLink,
-.age-gate-buttons a {
+.age-gate-buttons a,
+#tagSelectLink {
   padding: 11px 18px;
   border: 1px solid #594d40;
   border-radius: 0;
@@ -64,7 +65,8 @@ button,
 
 button:hover:not(:disabled),
 #productLink:hover,
-.age-gate-buttons a:hover {
+.age-gate-buttons a:hover,
+#tagSelectLink:hover {
   color: #f7f0e5;
   background: #594d40;
 }
@@ -126,16 +128,55 @@ button:disabled {
 
 
 /* =========================
-   絞り込み
+   検索条件エリア
 ========================= */
 
-.genre-filter,
-.price-filter {
-  margin-bottom: 24px;
+.search-conditions {
+  margin: 32px 0 36px;
+  padding: 22px;
+  border: 1px solid #c2b29d;
+  background: #f3eadc;
 }
 
-#genreSelect,
+.condition-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+}
+
+.condition-row + .condition-row {
+  margin-top: 18px;
+}
+
+.selected-tag-text {
+  min-width: 0;
+  margin: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+#selectedTagName {
+  font-weight: bold;
+}
+
+#tagSelectLink {
+  display: inline-block;
+  white-space: nowrap;
+  background: #f7f0e5;
+}
+
+.price-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+
 #priceSelect {
+  min-width: 170px;
   padding: 8px 12px;
   border: 1px solid #8d7c68;
   border-radius: 0;
@@ -145,11 +186,19 @@ button:disabled {
 }
 
 #resultCount {
+  margin: 0;
   line-height: 1.6;
+  white-space: nowrap;
+}
+
+.condition-reset {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #c2b29d;
 }
 
 #resetButton {
-  margin-bottom: 24px;
+  margin: 0;
   padding: 8px 16px;
 }
 
@@ -159,7 +208,7 @@ button:disabled {
 ========================= */
 
 .product {
-  padding-top: 32px;
+  padding-top: 4px;
   transition: opacity 0.25s ease;
 }
 
@@ -197,6 +246,40 @@ button:disabled {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 28px;
+}
+
+
+/* =========================
+   タグ一覧ページ
+========================= */
+
+.tag-page {
+  padding-top: 28px;
+}
+
+.tag-page > p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+#tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+#tagList a {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid #9f927e;
+  color: inherit;
+  background: #f4ecde;
+  text-decoration: none;
+}
+
+#tagList a:hover {
+  background: #e8dcc8;
 }
 
 
@@ -329,6 +412,47 @@ button:disabled {
     font-size: 20px;
   }
 
+  .search-conditions {
+    margin: 24px 0 28px;
+    padding: 18px;
+  }
+
+  .condition-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .condition-row + .condition-row {
+    margin-top: 20px;
+  }
+
+  #tagSelectLink {
+    width: 100%;
+    text-align: center;
+  }
+
+  .price-filter {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+
+  #priceSelect {
+    width: 100%;
+    min-width: 0;
+  }
+
+  #resultCount {
+    white-space: normal;
+  }
+
+  .condition-reset {
+    margin-top: 18px;
+    padding-top: 16px;
+  }
+
   .buttons,
   .age-gate-buttons,
   .footer-links {
@@ -340,6 +464,15 @@ button:disabled {
   .age-gate-buttons a {
     width: 100%;
     text-align: center;
+  }
+
+  #tagList {
+    gap: 8px;
+  }
+
+  #tagList a {
+    padding: 8px 12px;
+    font-size: 14px;
   }
 
   .footer-links {

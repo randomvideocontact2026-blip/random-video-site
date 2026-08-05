@@ -57,29 +57,39 @@
   </p>
 </section>
 
-    <div class="genre-filter">
-  <label for="genreSelect">表示するジャンル：</label>
+    <section class="search-conditions">
+  <div class="condition-row">
+    <p class="selected-tag-text">
+      選択中のタグ：
+      <span id="selectedTagName">指定なし</span>
+    </p>
 
-  <select id="genreSelect">
-    <option value="all">すべて</option>
-  </select>
-</div>
+    <a href="tags.html" id="tagSelectLink">
+      タグを選ぶ
+    </a>
+  </div>
 
- <div class="price-filter">
-  <label for="priceSelect">価格帯：</label>
+  <div class="condition-row">
+    <div class="price-filter">
+      <label for="priceSelect">価格帯：</label>
 
-  <select id="priceSelect">
-    <option value="all">すべて</option>
-    <option value="under1000">1,000円未満</option>
-    <option value="1000to1999">1,000円〜1,999円</option>
-    <option value="2000plus">2,000円以上</option>
-  </select>
-</div>
+      <select id="priceSelect">
+        <option value="all">すべて</option>
+        <option value="under1000">1,000円未満</option>
+        <option value="1000to1999">1,000円〜1,999円</option>
+        <option value="2000plus">2,000円以上</option>
+      </select>
+    </div>
 
-<p id="resultCount"></p>
+    <p id="resultCount"></p>
+  </div>
 
-<button id="resetButton" type="button">条件をリセット</button>
-
+  <div class="condition-reset">
+    <button id="resetButton" type="button">
+      条件をリセット
+    </button>
+  </div>
+</section>
     <section class="product">
       <img
   id="productImage"
@@ -104,9 +114,10 @@
 
         <footer class="site-footer">
       <nav class="footer-links">
-        <a href="about.html">運営者情報</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-        <a href="contact.html">お問い合わせ</a>
+       <a href="tags.html">タグ一覧</a>
+       <a href="about.html">運営者情報</a>
+       <a href="privacy.html">プライバシーポリシー</a>
+       <a href="contact.html">お問い合わせ</a>
       </nav>
 
       <p class="affiliate-notice">

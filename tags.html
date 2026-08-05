@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タグ一覧｜一作一会</title>
+  
+  <meta
+  name="description"
+  content="一作一会のタグ一覧ページです。作品をジャンルやタグから探せます。"
+>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="ageGate" class="age-gate">
+    <div class="age-gate-content">
+      <p class="age-gate-site-name">一作一会</p>
+
+      <h1>年齢確認</h1>
+
+      <p>
+        このサイトは成人向け作品を取り扱う予定です。
+      </p>
+
+      <p>
+        18歳未満の方はご利用いただけません。
+      </p>
+
+      <div class="age-gate-buttons">
+        <button id="ageConfirmButton" type="button">
+          18歳以上です
+        </button>
+
+        <a href="https://www.google.com/">
+          18歳未満です
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainContent" class="container" hidden>
+  <header>
+    <p class="site-name">一作一会</p>
+    <h1>タグ一覧</h1>
+  </header>
+
+  <section class="tag-page">
+    <p>
+      作品をタグから探せます。
+    </p>
+
+    <div id="tagList"></div>
+  </section>
+
+  <footer class="site-footer">
+    <nav class="footer-links">
+      <a href="index.html">トップページ</a>
+      <a href="about.html">運営者情報</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="contact.html">お問い合わせ</a>
+    </nav>
+
+    <p class="affiliate-notice">
+      当サイトはアフィリエイト広告を利用する予定です。
+    </p>
+
+    <p class="copyright">
+      &copy; 2026 一作一会
+    </p>
+  </footer>
+</main>
+
+  <script src="items.js"></script>
+  <script src="tags.js"></script>
+</body>
+</html>

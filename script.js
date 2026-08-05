@@ -8,10 +8,13 @@ const message = document.querySelector("#message");
 const productImage = document.querySelector("#productImage");
 const productLink = document.querySelector("#productLink");
 const product = document.querySelector(".product");
-const genreSelect = document.querySelector("#genreSelect");
+
 const priceSelect = document.querySelector("#priceSelect");
 const resetButton = document.querySelector("#resetButton");
 const resultCount = document.querySelector("#resultCount");
+
+const selectedTagName = document.querySelector("#selectedTagName");
+const tagSelectLink = document.querySelector("#tagSelectLink");
 
 const ageGate = document.querySelector("#ageGate");
 const ageConfirmButton = document.querySelector("#ageConfirmButton");
@@ -35,7 +38,9 @@ function validateItems() {
     if (!item.id) {
       console.error(`作品${itemNumber}：idがありません`);
     } else if (usedIds.has(item.id)) {
-      console.error(`作品${itemNumber}：id「${item.id}」が重複しています`);
+      console.error(
+        `作品${itemNumber}：id「${item.id}」が重複しています`
+      );
     } else {
       usedIds.add(item.id);
     }
@@ -45,52 +50,71 @@ function validateItems() {
     }
 
     if (typeof item.price !== "number") {
-  console.error(
-    `作品${itemNumber}：priceは数字で入力してください`
-  );
-}
-
-    if (!item.genre) {
-      console.error(`作品${itemNumber}：genreがありません`);
+      console.error(
+        `作品${itemNumber}：priceは数字で入力してください`
+      );
     }
 
-   if (!item.image) {
-  console.error(`作品${itemNumber}：imageがありません`);
-} else if (!isValidUrl(item.image)) {
-  console.error(`作品${itemNumber}：imageのURLが正しくありません`);
+    if (!Array.isArray(item.genres) || item.genres.length === 0) {
+      console.error(
+        `作品${itemNumber}：genresは1個以上のタグを含む配列にしてください`
+      );
+    }
+
+    if (!item.image) {
+      console.error(`作品${itemNumber}：imageがありません`);
+    } else if (!isValidUrl(item.image)) {
+      console.error(
+        `作品${itemNumber}：imageのURLが正しくありません`
+      );
+    }
+
+    if (!item.url) {
+      console.error(`作品${itemNumber}：urlがありません`);
+    } else if (!isValidUrl(item.url)) {
+      console.error(
+        `作品${itemNumber}：urlの形式が正しくありません`
+      );
+    }
+  });
 }
 
-   if (!item.url) {
-  console.error(`作品${itemNumber}：urlがありません`);
-} else if (!isValidUrl(item.url)) {
-  console.error(`作品${itemNumber}：urlの形式が正しくありません`);
-}
-});
-}
 validateItems();
 
-const genres = [...new Set(items.map((item) => item.genre))].sort(
-  (a, b) => a.localeCompare(b, "ja")
-);
+const tags = [
+  ...new Set(
+    items.flatMap((item) =>
+      Array.isArray(item.genres) ? item.genres : []
+    )
+  )
+].sort((a, b) => a.localeCompare(b, "ja"));
 
-genres.forEach((genreName) => {
-  const option = document.createElement("option");
+const urlParams = new URLSearchParams(window.location.search);
+const tagFromUrl = urlParams.get("tag");
 
-  option.value = genreName;
-  option.textContent = genreName;
+let selectedTag = null;
 
-  genreSelect.appendChild(option);
-});
+if (tagFromUrl && tags.includes(tagFromUrl)) {
+  selectedTag = tagFromUrl;
+}
 
+function updateSelectedTagDisplay() {
+  if (selectedTag) {
+    selectedTagName.textContent = selectedTag;
+    tagSelectLink.textContent = "タグを変更する";
+  } else {
+    selectedTagName.textContent = "指定なし";
+    tagSelectLink.textContent = "タグを選ぶ";
+  }
+}
 
 function getFilteredItems() {
-  const selectedGenre = genreSelect.value;
   const selectedPrice = priceSelect.value;
 
   return items.filter((item) => {
-    const genreMatches =
-      selectedGenre === "all" || item.genre === selectedGenre;
-
+    const tagMatches =
+      selectedTag === null ||
+      item.genres.includes(selectedTag);
 
     let priceMatches = false;
 
@@ -99,19 +123,37 @@ function getFilteredItems() {
     } else if (selectedPrice === "under1000") {
       priceMatches = item.price < 1000;
     } else if (selectedPrice === "1000to1999") {
-      priceMatches = item.price >= 1000 && item.price < 2000;
+      priceMatches =
+        item.price >= 1000 && item.price < 2000;
     } else if (selectedPrice === "2000plus") {
-       priceMatches = item.price >= 2000;
+      priceMatches = item.price >= 2000;
     }
 
-    return genreMatches && priceMatches;
+    return tagMatches && priceMatches;
   });
 }
 
 function updateResultCount() {
   const filteredItems = getFilteredItems();
 
-  resultCount.textContent = `該当作品：${filteredItems.length}件`;
+  resultCount.textContent =
+    `該当作品：${filteredItems.length}件`;
+}
+
+function resetProductDisplay() {
+  productImage.src =
+    "https://placehold.co/1280x720?text=Random+Video";
+  productImage.alt = "作品画像";
+
+  title.textContent =
+    "ボタンを押すと作品が表示されます。";
+
+  price.textContent = "";
+  genre.textContent = "";
+  message.textContent = "";
+
+  productLink.hidden = true;
+  randomButton.textContent = "作品を探す";
 }
 
 function showRandomItem() {
@@ -119,46 +161,53 @@ function showRandomItem() {
   product.classList.add("fade-out");
 
   setTimeout(() => {
-   const filteredItems = getFilteredItems();
+    const filteredItems = getFilteredItems();
 
-if (filteredItems.length === 0) {
-  title.textContent = "該当する作品がありません";
-  price.textContent = "";
-  genre.textContent = "";
-  message.textContent =
-    "条件を変更して、もう一度お試しください。";
+    if (filteredItems.length === 0) {
+      title.textContent = "該当する作品がありません";
+      price.textContent = "";
+      genre.textContent = "";
 
-  productImage.src =
-    "https://placehold.co/1280x720/f3eadc/594d40?text=No+Items";
+      message.textContent =
+        "条件を変更して、もう一度お試しください。";
 
-  productImage.alt = "該当する作品がありません";
+      productImage.src =
+        "https://placehold.co/1280x720/f3eadc/594d40?text=No+Items";
 
-  productLink.hidden = true;
+      productImage.alt =
+        "該当する作品がありません";
 
-  product.classList.remove("fade-out");
-  randomButton.disabled = false;
-  return;
-}
+      productLink.hidden = true;
 
-let selectedItem;
+      product.classList.remove("fade-out");
+      randomButton.disabled = false;
 
-do {
-  const randomNumber = Math.floor(
-    Math.random() * filteredItems.length
-  );
+      return;
+    }
 
-  selectedItem = filteredItems[randomNumber];
-} while (
-  selectedItem.id === lastItemId &&
-  filteredItems.length > 1
-);
+    let selectedItem;
 
-lastItemId = selectedItem.id;
+    do {
+      const randomNumber = Math.floor(
+        Math.random() * filteredItems.length
+      );
+
+      selectedItem = filteredItems[randomNumber];
+    } while (
+      selectedItem.id === lastItemId &&
+      filteredItems.length > 1
+    );
+
+    lastItemId = selectedItem.id;
 
     title.textContent = selectedItem.title;
+
     price.textContent =
-  `価格：${selectedItem.price.toLocaleString("ja-JP")}円`;
-    genre.textContent = `ジャンル：${selectedItem.genre}`;
+      `価格：${selectedItem.price.toLocaleString("ja-JP")}円`;
+
+    genre.textContent =
+      `ジャンル：${selectedItem.genres.join(" / ")}`;
+
     message.textContent = "";
 
     productImage.src = selectedItem.image;
@@ -170,16 +219,11 @@ lastItemId = selectedItem.id;
     randomButton.textContent = "別の作品を見る";
 
     product.classList.remove("fade-out");
-  }, 250);
     randomButton.disabled = false;
+  }, 250);
 }
 
 randomButton.addEventListener("click", showRandomItem);
-
-genreSelect.addEventListener("change", () => {
- lastItemId = null;
-  updateResultCount();
-});
 
 priceSelect.addEventListener("change", () => {
   lastItemId = null;
@@ -187,40 +231,28 @@ priceSelect.addEventListener("change", () => {
 });
 
 resetButton.addEventListener("click", () => {
-  // 絞り込み条件を「すべて」に戻す
-  genreSelect.value = "all";
+  selectedTag = null;
   priceSelect.value = "all";
 
-  // 前回の抽選番号をリセットする
- lastItemId = null;
+  window.history.replaceState({}, "", "index.html");
 
-  // 画面を最初の状態に戻す
-  productImage.src =
-    "https://placehold.co/1280x720?text=Random+Video";
-  productImage.alt = "作品画像";
+  lastItemId = null;
 
-  title.textContent = "ボタンを押すと作品が表示されます。";
-  price.textContent = "";
-  genre.textContent = "";
-  message.textContent = "";
-
-  productLink.hidden = true;
-
-  randomButton.textContent = "作品を探す";
-
-   updateResultCount();
+  updateSelectedTagDisplay();
+  resetProductDisplay();
+  updateResultCount();
 });
-
-updateResultCount();
 
 productImage.addEventListener("error", () => {
   productImage.src =
     "https://placehold.co/1280x720/f3eadc/594d40?text=Image+Not+Found";
 
-  productImage.alt = "画像を読み込めませんでした";
+  productImage.alt =
+    "画像を読み込めませんでした";
 });
 
-const ageConfirmed = sessionStorage.getItem("ageConfirmed");
+const ageConfirmed =
+  sessionStorage.getItem("ageConfirmed");
 
 if (ageConfirmed === "true") {
   ageGate.hidden = true;
@@ -233,3 +265,10 @@ ageConfirmButton.addEventListener("click", () => {
   ageGate.hidden = true;
   mainContent.hidden = false;
 });
+
+updateSelectedTagDisplay();
+updateResultCount();
+
+if (selectedTag) {
+  showRandomItem();
+}
