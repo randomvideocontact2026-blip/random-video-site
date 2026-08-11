@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>一作一会の使い方 | 一作一会</title>
 
-  <meta
-    name="description"
-    content="FANZA作品をランダムに探せるサイト「一作一会」の使い方を説明します。タグや価格帯を指定して、条件に合う作品を探せます。"
-  >
+  <meta name="description" content="FANZA作品をランダムに探せるサイト「一作一会」の使い方を説明します。タグ、女優名、価格帯を指定して、条件に合う作品を探せます。">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,16 +16,27 @@
   <main class="container legal-page">
     <header>
       <p class="site-name">
-       <a href="index.html">一作一会</a>
+        <a href="index.html">一作一会</a>
       </p>
+
       <h1>一作一会の使い方</h1>
+
+      <nav class="main-nav">
+        <a href="index.html">トップ</a>
+        <a href="index.html">共通</a>
+        <a href="index.html?type=2d">2D</a>
+        <a href="index.html?type=vr">VR</a>
+        <a href="tags.html">タグ一覧</a>
+        <a href="actresses.html">女優検索</a>
+        <a href="guide.html">使い方</a>
+      </nav>
     </header>
 
     <section class="legal-content">
       <h2>一作一会とは</h2>
 
       <p>
-        一作一会は、タグや価格帯などの条件を指定して、
+        一作一会は、タグ、女優名、価格帯などの条件を指定して、
         条件に合う作品をランダムに探せるWebサービスです。
       </p>
 
@@ -36,8 +45,8 @@
         ある程度条件を絞ったうえで偶然表示された作品を楽しむことを目的としています。
       </p>
 
-      <p>
-        現在は開発中のため、架空のサンプル作品を使用しています。
+      <p class="development-notice">
+        現在は一部の作品情報を掲載しています。掲載作品は順次追加予定です。
       </p>
 
       <h2>1．タグを選ぶ</h2>
@@ -48,11 +57,29 @@
       </p>
 
       <p>
-        タグ一覧には、それぞれのタグに該当する作品数が表示されています。
-        気になるタグを選ぶと、そのタグに該当する作品だけが検索対象になります。
+        気になるタグを選ぶと、
+        そのタグに該当する作品だけが検索対象になります。
       </p>
 
-      <h2>2．価格帯を選ぶ</h2>
+      <h2>2．女優を選ぶ</h2>
+
+      <p>
+        トップページにある「女優を選ぶ」を押すと、
+        女優検索ページへ移動します。
+      </p>
+
+      <p>
+        女優名を入力すると候補が表示されます。
+        女優を選ぶと、その女優が出演している作品だけが検索対象になります。
+      </p>
+
+      <p>
+        タグと女優は同時に指定できます。
+        たとえば、特定のタグに該当する作品の中から、
+        選択した女優の作品だけを探すこともできます。
+      </p>
+
+      <h2>3．価格帯を選ぶ</h2>
 
       <p>
         トップページの価格帯から、
@@ -64,7 +91,7 @@
         「2,000円以上」の4つから選択できます。
       </p>
 
-      <h2>3．作品を探す</h2>
+      <h2>4．作品を探す</h2>
 
       <p>
         条件を選んだあとに「作品を探す」ボタンを押すと、
@@ -76,7 +103,7 @@
         直前に表示された作品と同じ作品が連続しないようにしています。
       </p>
 
-      <h2>4．別の作品を探す</h2>
+      <h2>5．別の作品を探す</h2>
 
       <p>
         もう一度「作品を探す」ボタンを押すと、
@@ -88,7 +115,7 @@
         該当する作品がないことを知らせる案内が表示されます。
       </p>
 
-      <h2>5．商品ページを確認する</h2>
+      <h2>6．商品ページを確認する</h2>
 
       <p>
         作品が表示されたあとに「商品ページへ」を押すと、
@@ -100,11 +127,11 @@
         移動先の商品ページでご確認ください。
       </p>
 
-      <h2>6．条件をリセットする</h2>
+      <h2>7．条件をリセットする</h2>
 
       <p>
         「条件をリセット」を押すと、
-        選択中のタグと価格帯が初期状態に戻ります。
+        選択中のタグ、女優、価格帯がすべて初期状態に戻ります。
       </p>
 
       <p>
@@ -112,14 +139,23 @@
       </p>
     </section>
 
-    <nav class="back-link footer-links">
-     <a href="index.html">トップページ</a>
-     <a href="concept.html">一作一会について</a>
-     <a href="tags.html">タグ一覧</a>
-     <a href="about.html">運営者情報</a>
-     <a href="privacy.html">プライバシーポリシー</a>
-     <a href="contact.html">お問い合わせ</a>
-    </nav>
+    <footer class="site-footer">
+      <nav class="footer-links">
+        <a href="concept.html">一作一会について</a>
+        <a href="about.html">運営者情報</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+
+      <p class="affiliate-notice">
+        当サイトはアフィリエイト広告を利用する予定です。
+      </p>
+
+      <p class="copyright">
+        &copy; 2026 一作一会
+      </p>
+    </footer>
   </main>
 </body>
+
 </html>

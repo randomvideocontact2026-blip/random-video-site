@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>一作一会について | 一作一会</title>
 
-  <meta
-    name="description"
-    content="FANZA作品をランダムに探せるサイト「一作一会」の目的や、ランダム表示を採用した理由について説明します。"
-  >
+  <meta name="description" content="FANZA作品をランダムに探せるサイト「一作一会」の目的や、ランダム表示を採用した理由について説明します。">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,9 +16,20 @@
   <main class="container legal-page">
     <header>
       <p class="site-name">
-       <a href="index.html">一作一会</a>
+        <a href="index.html">一作一会</a>
       </p>
+
       <h1>一作一会について</h1>
+
+      <nav class="main-nav">
+        <a href="index.html">トップ</a>
+        <a href="index.html">共通</a>
+        <a href="index.html?type=2d">2D</a>
+        <a href="index.html?type=vr">VR</a>
+        <a href="tags.html">タグ一覧</a>
+        <a href="actresses.html">女優検索</a>
+        <a href="guide.html">使い方</a>
+      </nav>
     </header>
 
     <section class="legal-content">
@@ -64,7 +73,7 @@
       </p>
 
       <p>
-        そのため、一作一会ではタグや価格帯などの条件を指定したうえで、
+        そのため、一作一会ではタグ、女優名、価格帯などの条件を指定したうえで、
         条件に合う作品だけをランダム表示できる仕組みにしています。
       </p>
 
@@ -85,31 +94,40 @@
         できるだけ異なる作品と出会えるようにするための機能です。
       </p>
 
-      <h2>今後追加する予定の機能</h2>
+      <h2>現在の機能</h2>
 
       <p>
-        現在は、タグと価格帯を使った絞り込み機能を中心に開発しています。
+        現在は、タグ、女優名、価格帯、2D・VRの区分を使って条件を絞り込み、
+        条件に合う作品をランダムに探せる機能を実装しています。
       </p>
 
       <p>
-        今後は、女優名による検索や、通常作品とVR作品の区別など、
-        より利用しやすくするための機能を追加する予定です。
+        また、タグ一覧や女優検索から条件を指定し、
+        選択した条件を保持したまま作品を探せるようにしています。
       </p>
 
       <p>
-        現在表示している作品は、動作確認用の架空のサンプルデータです。
-        正式な作品情報への対応に向けて、引き続き開発を進めています。
+        現在は一部の作品情報を掲載しています。掲載作品は順次追加予定です。
       </p>
     </section>
 
-    <nav class="back-link footer-links">
-      <a href="index.html">トップページ</a>
-      <a href="guide.html">一作一会の使い方</a>
-      <a href="tags.html">タグ一覧</a>
-      <a href="about.html">運営者情報</a>
-      <a href="privacy.html">プライバシーポリシー</a>
-      <a href="contact.html">お問い合わせ</a>
-    </nav>
+    <footer class="site-footer">
+      <nav class="footer-links">
+        <a href="concept.html">一作一会について</a>
+        <a href="about.html">運営者情報</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+
+      <p class="affiliate-notice">
+        当サイトはアフィリエイト広告を利用する予定です。
+      </p>
+
+      <p class="copyright">
+        &copy; 2026 一作一会
+      </p>
+    </footer>
   </main>
 </body>
+
 </html>

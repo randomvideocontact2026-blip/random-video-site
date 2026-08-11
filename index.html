@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>一作一会｜FANZA作品をランダムに探せるサイト</title>
-  
-  <meta
-  name="description"
-  content="一作一会は、ジャンルや価格帯を選んでFANZA作品をランダムに探せる非公式サイトです。次に観る作品との偶然の出会いを楽しめます。"
->
+
+  <meta name="description" content="一作一会は、タグ、女優名、価格帯などの条件を指定してFANZA作品をランダムに探せる非公式サイトです。次に観る作品との偶然の出会いを楽しめます。">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -40,62 +38,85 @@
     </div>
   </div>
 
+
   <main id="mainContent" class="container" hidden>
     <header>
-      <p class="site-name">一作一会</p>
+      <p class="site-name">
+        <a href="index.html">一作一会</a>
+      </p>
       <h1>次に観る作品を、偶然に。</h1>
+
+      <nav class="main-nav">
+        <a href="index.html">トップ</a>
+        <a id="navAllLink" href="index.html">共通</a>
+        <a id="nav2dLink" href="index.html?type=2d">2D</a>
+        <a id="navVrLink" href="index.html?type=vr">VR</a>
+        <a id="navTagsLink" href="tags.html">タグ一覧</a>
+        <a id="navActressesLink" href="actresses.html">女優検索</a>
+        <a href="guide.html">使い方</a>
+      </nav>
+
+      <p id="typeIndicator" class="type-indicator" hidden></p>
     </header>
 
     <section class="site-introduction">
-  <p>
-  ジャンルや価格帯を選んで、FANZA作品をランダムに探せるサイトです。
-  </p>
+      <p>
+        タグ、女優名、価格帯などの条件を指定して、
+        FANZA作品をランダムに探せるサイトです。
+      </p>
 
-  <p class="sample-notice">
-  現在は開発中のため、架空のサンプル作品を表示しています。
-  当サイトはFANZAの非公式サイトです。
-  </p>
-</section>
+      <p class="development-notice">
+        現在は一部の作品情報を掲載しています。掲載作品は順次追加予定です。
+        当サイトはFANZAの非公式サイトです。
+      </p>
+    </section>
 
     <section class="search-conditions">
-  <div class="condition-row">
-    <p class="selected-tag-text">
-      選択中のタグ：
-      <span id="selectedTagName">指定なし</span>
-    </p>
+      <div class="condition-row">
+        <p class="selected-tag-text">
+          選択中のタグ：
+          <span id="selectedTagName">指定なし</span>
+        </p>
 
-    <a href="tags.html" id="tagSelectLink">
-      タグを選ぶ
-    </a>
-  </div>
+        <a href="tags.html" id="tagSelectLink">
+          タグを選ぶ
+        </a>
+      </div>
 
-  <div class="condition-row">
-    <div class="price-filter">
-      <label for="priceSelect">価格帯：</label>
+      <div class="condition-row">
+        <p class="selected-tag-text">
+          選択中の女優：
+          <strong id="selectedActressName">指定なし</strong>
+        </p>
 
-      <select id="priceSelect">
-        <option value="all">すべて</option>
-        <option value="under1000">1,000円未満</option>
-        <option value="1000to1999">1,000円〜1,999円</option>
-        <option value="2000plus">2,000円以上</option>
-      </select>
-    </div>
+        <a id="actressSelectLink" href="actresses.html" class="filter-link">
+          女優を選ぶ
+        </a>
+      </div>
 
-    <p id="resultCount"></p>
-  </div>
+      <div class="condition-row">
+        <div class="price-filter">
+          <label for="priceSelect">価格帯：</label>
 
-  <div class="condition-reset">
-    <button id="resetButton" type="button">
-      条件をリセット
-    </button>
-  </div>
-</section>
+          <select id="priceSelect">
+            <option value="all">すべて</option>
+            <option value="under1000">1,000円未満</option>
+            <option value="1000to1999">1,000円〜1,999円</option>
+            <option value="2000plus">2,000円以上</option>
+          </select>
+        </div>
+
+        <p id="resultCount"></p>
+      </div>
+
+      <div class="condition-reset">
+        <button id="resetButton" type="button">
+          条件をリセット
+        </button>
+      </div>
+    </section>
     <section class="product">
-      <img
-  id="productImage"
-  src="https://placehold.co/1280x720?text=Random+Video"
-  alt="作品画像"
->
+      <img id="productImage" src="https://placehold.co/1280x720?text=Random+Video" alt="作品画像">
       <p id="title">ボタンを押すと作品が表示されます。</p>
       <p id="price"></p>
       <p id="genre"></p>
@@ -103,21 +124,19 @@
 
       <div class="buttons">
         <button id="randomButton" type="button">
-         作品を探す
+          作品を探す
         </button>
-        
+
         <a id="productLink" href="#" target="_blank" hidden>
           商品ページへ
         </a>
       </div>
     </section>
 
-    <div class="footer-divider"></div>
+    <footer class="site-footer">
 
-       <nav class="footer-links">
+      <nav class="footer-links">
         <a href="concept.html">一作一会について</a>
-        <a href="guide.html">一作一会の使い方</a>
-        <a href="tags.html">タグ一覧</a>
         <a href="about.html">運営者情報</a>
         <a href="privacy.html">プライバシーポリシー</a>
         <a href="contact.html">お問い合わせ</a>
@@ -137,4 +156,5 @@
   <script src="items.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>

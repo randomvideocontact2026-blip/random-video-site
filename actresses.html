@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>女優検索｜一作一会</title>
+
+    <meta name="description" content="一作一会の女優検索ページです。女優名から作品を探せます。">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="container legal-page">
+
+        <header>
+            <p class="site-name">
+                <a href="index.html">一作一会</a>
+            </p>
+
+            <h1>女優検索</h1>
+
+            <nav class="main-nav">
+                <a href="index.html">トップ</a>
+                <a id="navAllLink" href="actresses.html">共通</a>
+                <a id="nav2dLink" href="actresses.html?type=2d">2D</a>
+                <a id="navVrLink" href="actresses.html?type=vr">VR</a>
+                <a id="navTagsLink" href="tags.html">タグ一覧</a>
+                <a id="navActressesLink" href="actresses.html">女優検索</a>
+                <a href="guide.html">使い方</a>
+            </nav>
+
+            <p id="typeIndicator" class="type-indicator" hidden></p>
+        </header>
+
+        <section class="legal-content">
+
+            <p>
+                女優名を入力して作品を探せます。
+            </p>
+
+            <div class="actress-search">
+                <label for="actressSearchInput">
+                    女優名
+                </label>
+
+                <input id="actressSearchInput" type="search" placeholder="女優名を入力" autocomplete="off">
+
+                <div id="actressResults"></div>
+            </div>
+
+        </section>
+
+        <footer class="site-footer">
+            <nav class="footer-links">
+                <a href="concept.html">一作一会について</a>
+                <a href="about.html">運営者情報</a>
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="contact.html">お問い合わせ</a>
+            </nav>
+
+            <p class="affiliate-notice">
+                当サイトはアフィリエイト広告を利用する予定です。
+            </p>
+
+            <p class="copyright">
+                &copy; 2026 一作一会
+            </p>
+        </footer>
+
+    </main>
+
+    <script src="items.js"></script>
+    <script src="actresses.js"></script>
+</body>
+
+</html>

@@ -16,6 +16,20 @@ const resultCount = document.querySelector("#resultCount");
 const selectedTagName = document.querySelector("#selectedTagName");
 const tagSelectLink = document.querySelector("#tagSelectLink");
 
+const nav2dLink = document.querySelector("#nav2dLink");
+const navVrLink = document.querySelector("#navVrLink");
+const typeIndicator = document.querySelector("#typeIndicator");
+const navAllLink = document.querySelector("#navAllLink");
+
+const navTagsLink = document.querySelector("#navTagsLink");
+const navActressesLink = document.querySelector("#navActressesLink");
+
+const selectedActressName =
+  document.querySelector("#selectedActressName");
+
+const actressSelectLink =
+  document.querySelector("#actressSelectLink");
+
 const ageGate = document.querySelector("#ageGate");
 const ageConfirmButton = document.querySelector("#ageConfirmButton");
 const mainContent = document.querySelector("#mainContent");
@@ -90,12 +104,57 @@ const tags = [
 ].sort((a, b) => a.localeCompare(b, "ja"));
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const tagFromUrl = urlParams.get("tag");
+const actressFromUrl = urlParams.get("actress");
+const typeFromUrl = urlParams.get("type");
 
 let selectedTag = null;
+let selectedActress = null;
+let selectedType = null;
 
 if (tagFromUrl && tags.includes(tagFromUrl)) {
   selectedTag = tagFromUrl;
+}
+if (actressFromUrl) {
+  selectedActress = actressFromUrl;
+}
+if (typeFromUrl === "2d" || typeFromUrl === "vr") {
+  selectedType = typeFromUrl;
+}
+
+function updateTypeDisplay() {
+  navAllLink.classList.remove("active-type");
+  nav2dLink.classList.remove("active-type");
+  navVrLink.classList.remove("active-type");
+
+  typeIndicator.classList.remove("is-2d", "is-vr");
+
+  if (selectedType === "2d") {
+    nav2dLink.classList.add("active-type");
+
+    typeIndicator.textContent =
+      "現在：2D版を表示中";
+
+    typeIndicator.classList.add("is-2d");
+    typeIndicator.hidden = false;
+  } else if (selectedType === "vr") {
+    navVrLink.classList.add("active-type");
+
+    typeIndicator.textContent =
+      "現在：VR版を表示中";
+
+    typeIndicator.classList.add("is-vr");
+    typeIndicator.hidden = false;
+  } else {
+    navAllLink.classList.add("active-type");
+
+    typeIndicator.textContent =
+      "現在：2D / VR 共通版を表示中";
+
+    typeIndicator.classList.remove("is-2d", "is-vr");
+    typeIndicator.hidden = false;
+  }
 }
 
 function updateSelectedTagDisplay() {
@@ -105,6 +164,16 @@ function updateSelectedTagDisplay() {
   } else {
     selectedTagName.textContent = "指定なし";
     tagSelectLink.textContent = "タグを選ぶ";
+  }
+}
+
+function updateSelectedActressDisplay() {
+  if (selectedActress) {
+    selectedActressName.textContent = selectedActress;
+    actressSelectLink.textContent = "女優を変更する";
+  } else {
+    selectedActressName.textContent = "指定なし";
+    actressSelectLink.textContent = "女優を選ぶ";
   }
 }
 
@@ -129,7 +198,21 @@ function getFilteredItems() {
       priceMatches = item.price >= 2000;
     }
 
-    return tagMatches && priceMatches;
+    const actressMatches =
+      selectedActress === null ||
+      (Array.isArray(item.actresses) &&
+        item.actresses.includes(selectedActress));
+
+    const typeMatches =
+      selectedType === null ||
+      item.type === selectedType;
+
+    return (
+      tagMatches &&
+      priceMatches &&
+      actressMatches &&
+      typeMatches
+    );
   });
 }
 
@@ -232,13 +315,26 @@ priceSelect.addEventListener("change", () => {
 
 resetButton.addEventListener("click", () => {
   selectedTag = null;
+  selectedActress = null;
+  selectedType = null;
   priceSelect.value = "all";
 
-  window.history.replaceState({}, "", "index.html");
+  if (selectedType) {
+    window.history.replaceState(
+      {},
+      "",
+      `index.html?type=${selectedType}`
+    );
+  } else {
+    window.history.replaceState({}, "", "index.html");
+  }
 
   lastItemId = null;
 
   updateSelectedTagDisplay();
+  updateSelectedActressDisplay();
+  updateTypeDisplay();
+  updateFilterLinks();
   resetProductDisplay();
   updateResultCount();
 });
@@ -267,6 +363,53 @@ ageConfirmButton.addEventListener("click", () => {
 });
 
 updateSelectedTagDisplay();
+updateSelectedActressDisplay();
+updateTypeDisplay();
+
+function updateFilterLinks() {
+  const tagParams = new URLSearchParams();
+
+  if (selectedActress) {
+    tagParams.set("actress", selectedActress);
+  }
+
+  if (selectedType) {
+    tagParams.set("type", selectedType);
+  }
+
+  const tagQuery = tagParams.toString();
+
+  tagSelectLink.href =
+    tagQuery ? `tags.html?${tagQuery}` : "tags.html";
+
+
+  const actressParams = new URLSearchParams();
+
+  if (selectedTag) {
+    actressParams.set("tag", selectedTag);
+  }
+
+  if (selectedType) {
+    actressParams.set("type", selectedType);
+  }
+
+  const actressQuery = actressParams.toString();
+
+  actressSelectLink.href =
+    actressQuery
+      ? `actresses.html?${actressQuery}`
+      : "actresses.html";
+
+  if (selectedType) {
+    navTagsLink.href = `tags.html?type=${selectedType}`;
+    navActressesLink.href = `actresses.html?type=${selectedType}`;
+  } else {
+    navTagsLink.href = "tags.html";
+    navActressesLink.href = "actresses.html";
+  }
+}
+
+updateFilterLinks();
 updateResultCount();
 
 if (selectedTag) {

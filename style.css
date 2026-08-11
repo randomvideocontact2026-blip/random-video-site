@@ -29,6 +29,31 @@ header {
   border-bottom: 1px solid #8d7c68;
 }
 
+/* =========================
+上部ナビゲーション
+========================= */
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  margin: 22px 0 0;
+  padding: 16px 0 0;
+}
+
+.main-nav a {
+  color: #2f2922;
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .site-name,
 .age-gate-site-name {
   margin: 0 0 16px;
@@ -52,7 +77,8 @@ h1 {
 button,
 #productLink,
 .age-gate-buttons a,
-#tagSelectLink {
+#tagSelectLink,
+#actressSelectLink {
   padding: 11px 18px;
   border: 1px solid #594d40;
   border-radius: 0;
@@ -66,7 +92,8 @@ button,
 button:hover:not(:disabled),
 #productLink:hover,
 .age-gate-buttons a:hover,
-#tagSelectLink:hover {
+#tagSelectLink:hover,
+#actressSelectLink:hover {
   color: #f7f0e5;
   background: #594d40;
 }
@@ -160,7 +187,8 @@ button:disabled {
   font-weight: bold;
 }
 
-#tagSelectLink {
+#tagSelectLink,
+#actressSelectLink {
   display: inline-block;
   white-space: nowrap;
   background: #f7f0e5;
@@ -422,9 +450,26 @@ button:disabled {
     padding: 24px 18px;
   }
 
-  h1 {
+  h1 {  justify-content: flex-start;
+    gap: 18px;
+    margin: 16px 0 20px;
+    padding: 10px 0;
+    overflow-x: auto;
     font-size: 24px;
   }
+
+  .main-nav {
+  justify-content: flex-start;
+  gap: 18px;
+  margin: 18px 0 0;
+  padding: 14px 0 0;
+  overflow-x: auto;
+}
+
+.main-nav a {
+  flex: 0 0 auto;
+  font-size: 13px;
+}
 
   #title {
     font-size: 20px;
@@ -445,10 +490,11 @@ button:disabled {
     margin-top: 20px;
   }
 
-  #tagSelectLink {
-    width: 100%;
-    text-align: center;
-  }
+  #tagSelectLink,
+  #actressSelectLink {
+  width: 100%;
+  text-align: center;
+}
 
   .price-filter {
     display: grid;
@@ -514,4 +560,60 @@ button:disabled {
 
 .site-name a:hover {
   text-decoration: none;
+}
+
+.actress-search {
+  margin-top: 24px;
+}
+
+.actress-search label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+#actressSearchInput {
+  width: 100%;
+  max-width: 360px;
+  padding: 10px 12px;
+  font-size: 16px;
+}
+
+#actressResults {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+#actressResults a {
+  display: inline-block;
+  padding: 6px 10px;
+}
+
+.main-nav a.active-type {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid #594d40;
+  background: #594d40;
+  color: #f8f3ea;
+  text-decoration: none;
+}
+
+.type-indicator {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 8px 14px;
+  border: 1px solid #594d40;
+  background: #efe4d3;
+  color: #594d40;
+  font-size: 14px;
+}
+
+.type-indicator.is-2d {
+  background: #efe4d3;
+}
+
+.type-indicator.is-vr {
+  background: #e4eadf;
 }
