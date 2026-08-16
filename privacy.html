@@ -13,7 +13,33 @@
 </head>
 
 <body>
-  <main class="container legal-page">
+  <div id="ageGate" class="age-gate">
+    <div class="age-gate-content">
+      <p class="age-gate-site-name">一作一会</p>
+
+      <h1>年齢確認</h1>
+
+      <p>
+        このサイトは成人向け作品を取り扱っています。
+      </p>
+
+      <p>
+        18歳未満の方はご利用いただけません。
+      </p>
+
+      <div class="age-gate-buttons">
+        <button id="ageConfirmButton" type="button">
+          18歳以上です
+        </button>
+
+        <a href="https://www.google.com/">
+          18歳未満です
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main id="mainContent" class="container legal-page" hidden>
     <header>
       <p class="site-name">
         <a href="index.html">一作一会</a>
@@ -31,6 +57,10 @@
         <a href="guide.html">使い方</a>
       </nav>
     </header>
+
+    <p class="affiliate-pr-notice">
+      <strong>PR</strong> 当サイトはアフィリエイト広告を利用しています。
+    </p>
 
     <section class="legal-content">
       <h2>個人情報の取り扱いについて</h2>
@@ -60,13 +90,12 @@
       <h2>広告について</h2>
 
       <p>
-        当サイトでは、第三者配信の広告サービスや
-        アフィリエイトプログラムを利用する場合があります。
+        当サイトでは、アフィリエイトプログラムを利用しています。
       </p>
 
       <p>
-        商品やサービスの購入によって、
-        当サイトに紹介料が支払われる場合があります。
+        当サイト内のリンクを経由して商品やサービスを購入した場合、
+        当サイトに紹介料が支払われることがあります。
       </p>
 
       <h2>外部サイトについて</h2>
@@ -97,7 +126,7 @@
       </nav>
 
       <p class="affiliate-notice">
-        当サイトはアフィリエイト広告を利用する予定です。
+        当サイトはアフィリエイト広告を利用しています。
       </p>
 
       <p class="copyright">
@@ -105,6 +134,26 @@
       </p>
     </footer>
   </main>
+
+  <script>
+    const ageGate = document.getElementById("ageGate");
+    const mainContent = document.getElementById("mainContent");
+    const ageConfirmButton = document.getElementById("ageConfirmButton");
+
+    const ageConfirmed = sessionStorage.getItem("ageConfirmed");
+
+    if (ageConfirmed === "true") {
+      ageGate.hidden = true;
+      mainContent.hidden = false;
+    }
+
+    ageConfirmButton.addEventListener("click", () => {
+      sessionStorage.setItem("ageConfirmed", "true");
+
+      ageGate.hidden = true;
+      mainContent.hidden = false;
+    });
+  </script>
 </body>
 
 </html>

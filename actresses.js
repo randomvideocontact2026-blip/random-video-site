@@ -1,3 +1,21 @@
+const ageGate = document.getElementById("ageGate");
+const mainContent = document.getElementById("mainContent");
+const ageConfirmButton = document.getElementById("ageConfirmButton");
+
+const ageConfirmed = sessionStorage.getItem("ageConfirmed");
+
+if (ageConfirmed === "true") {
+  ageGate.hidden = true;
+  mainContent.hidden = false;
+}
+
+ageConfirmButton.addEventListener("click", () => {
+  sessionStorage.setItem("ageConfirmed", "true");
+
+  ageGate.hidden = true;
+  mainContent.hidden = false;
+}); 
+
 const actressSearchInput = document.getElementById("actressSearchInput");
 const actressResults = document.getElementById("actressResults");
 

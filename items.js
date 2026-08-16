@@ -7,7 +7,7 @@ const items = [
     genres: ["キャバ嬢・風俗嬢"],
     actresses: ["橘メアリー"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=gdrd00005"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dgdrd00005&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "jul00946",
@@ -17,7 +17,7 @@ const items = [
     genres: ["痴女"],
     actresses: ["黒川すみれ"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=jul00946"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Djul00946&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "dveh00083",
@@ -27,7 +27,7 @@ const items = [
     genres: ["巨乳"],
     actresses: ["推川ゆうり"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=dveh00083"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Ddveh00083&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "mdvr00430",
@@ -37,7 +37,7 @@ const items = [
     genres: ["巨乳", "オナサポ", "看護師"],
     actresses: ["Himari"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=mdvr00430"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dmdvr00430&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "fcvr00081",
@@ -47,7 +47,7 @@ const items = [
     genres: ["中だし", "3P"],
     actresses: ["巴ひかり", "佐藤愛瑠"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=fcvr00081"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dfcvr00081&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "savr01137",
@@ -57,7 +57,7 @@ const items = [
     genres: ["騎乗位", "美乳"],
     actresses: ["青坂あおい"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=savr01137"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dsavr01137&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "84exvr00007",
@@ -67,7 +67,7 @@ const items = [
     genres: ["脚フェチ", "淫語", "お姉さん"],
     actresses: ["蓮実クレア", "神ユキ"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=84exvr00007"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3D84exvr00007&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "1favr00003",
@@ -77,7 +77,7 @@ const items = [
     genres: ["お姉さん", "キス", "フェラ"],
     actresses: ["吉高寧々"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=1favr00003"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3D1favr00003&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "mdvr00426",
@@ -87,7 +87,7 @@ const items = [
     genres: ["脚フェチ", "エステ", "アナル"],
     actresses: ["森日向子"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=mdvr00426"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dmdvr00426&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "mdon00073",
@@ -97,7 +97,7 @@ const items = [
     genres: ["熟女", "巨乳", "ハメ撮り"],
     actresses: ["篠原いよ"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=mdon00073"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dmdon00073&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "aukg00644",
@@ -107,7 +107,7 @@ const items = [
     genres: ["レズビアン", "NTR", "熟女"],
     actresses: ["栗山さつき", "倖田李梨"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=aukg00644"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Daukg00644&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "mida00634",
@@ -117,7 +117,7 @@ const items = [
     genres: ["OL", "アクメ・オーガズム", "SM"],
     actresses: ["宮下玲奈"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=mida00634"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dmida00634&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "gvh00765",
@@ -127,7 +127,7 @@ const items = [
     genres: ["ボンテージ", "男の潮吹き", "拘束"],
     actresses: ["水川すみれ"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=gvh00765"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dgvh00765&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "juvr00276",
@@ -137,7 +137,7 @@ const items = [
     genres: ["熟女", "痴女", "人妻"],
     actresses: ["めぐり"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=juvr00276"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Djuvr00276&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   },
   {
     id: "sivr00490",
@@ -147,6 +147,6 @@ const items = [
     genres: ["デート", "カップル", "パイズリ"],
     actresses: ["瀬戸環奈"],
     image: "https://placehold.co/1280x720?text=FANZA+Product",
-    url: "https://video.dmm.co.jp/av/content/?id=sivr00490"
+    url: "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fvideo.dmm.co.jp%2Fav%2Fcontent%2F%3Fid%3Dsivr00490&af_id=randomfanza-003&ch=toolbar&ch_id=link"
   }
 ];

@@ -132,6 +132,23 @@ button:disabled {
   margin-top: 32px;
 }
 
+/* =========================
+   PR表記
+========================= */
+
+.affiliate-pr-notice {
+  margin: 20px 0 0;
+  padding: 10px 14px;
+  border-left: 3px solid #8d7c68;
+  background: #eee5d6;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.affiliate-pr-notice strong {
+  margin-right: 6px;
+  font-size: 15px;
+}
 
 /* =========================
    サイト説明
