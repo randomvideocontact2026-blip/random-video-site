@@ -1,0 +1,12 @@
+# 管理用Excel
+一作一会_作品管理.xlsx
+~$*.xlsx
+
+# 使用していない旧生成ファイル
+items_generated.js
+
+# APIの秘密情報（今後使用）
+.env
+
+# Pythonの一時ファイル
+__pycache__/
