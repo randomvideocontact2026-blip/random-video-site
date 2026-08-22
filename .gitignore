@@ -13,3 +13,6 @@ __pycache__/
 
 # APIから取得した作品データ
 fanza_items.db
+
+items_api_test.js
+test_api.py
