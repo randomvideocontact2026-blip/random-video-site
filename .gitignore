@@ -10,3 +10,6 @@ items_generated.js
 
 # Pythonの一時ファイル
 __pycache__/
+
+# APIから取得した作品データ
+fanza_items.db
