@@ -23,6 +23,16 @@ def run_script(script_name, description):
 
 def main():
     """作品データの取得・書き出し・検証を順番に実行する。"""
+
+    if not DATABASE_FILE.exists():
+        print("\n更新を中止しました。")
+        print(f"データベースが見つかりません: {DATABASE_FILE}")
+        print(
+            "fanza_items.dbを元の場所へ戻してから"
+            "再実行してください。"
+        )
+        raise SystemExit(1)
+
     print("作品データの一括更新を開始します。")
 
     with tempfile.TemporaryDirectory() as temporary_directory:
