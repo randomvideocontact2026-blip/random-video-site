@@ -214,6 +214,19 @@ def save_items(api_items):
         return 0
 
     with sqlite3.connect(DATABASE_FILE) as connection:
+        existing_ids = {
+            row[0]
+            for row in connection.execute(
+                "SELECT content_id FROM items"
+            )
+        }
+
+        new_count = sum(
+            item["content_id"] not in existing_ids
+            for item in converted_items
+        )
+        updated_count = len(converted_items) - new_count
+
         connection.executemany(
             """
             INSERT INTO items (
@@ -265,6 +278,8 @@ def save_items(api_items):
         )
 
     print(f"データベースへ保存した件数: {len(converted_items)}")
+    print(f"新しく追加した件数: {new_count}")
+    print(f"既存作品を更新した件数: {updated_count}")
 
     if skipped_count:
         print(f"必須情報がなく保存しなかった件数: {skipped_count}")
