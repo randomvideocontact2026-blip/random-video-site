@@ -1,5 +1,8 @@
 let lastItemId = null;
 
+const RANDOM_ITEM_API_URL =
+  "https://issaku-ichie-api.randomvideo-contact2026.workers.dev/";
+
 const randomButton = document.querySelector("#randomButton");
 const title = document.querySelector("#title");
 const price = document.querySelector("#price");
@@ -217,10 +220,7 @@ function getFilteredItems() {
 }
 
 function updateResultCount() {
-  const filteredItems = getFilteredItems();
-
-  resultCount.textContent =
-    `該当作品：${filteredItems.length}件`;
+  resultCount.hidden = true;
 }
 
 function resetProductDisplay() {
@@ -239,71 +239,151 @@ function resetProductDisplay() {
   randomButton.textContent = "作品を探す";
 }
 
-function showRandomItem() {
+function hasActiveFilters() {
+  return (
+    selectedTag !== null ||
+    selectedActress !== null ||
+    selectedType !== null ||
+    priceSelect.value !== "all"
+  );
+}
+
+async function fetchRandomItemFromApi() {
+  const response = await fetch(RANDOM_ITEM_API_URL, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `作品取得APIエラー: ${response.status}`
+    );
+  }
+
+  const data = await response.json();
+
+  if (!data.item) {
+    throw new Error("作品データが返されませんでした。");
+  }
+
+  return data.item;
+}
+
+function displayItem(selectedItem) {
+  lastItemId = selectedItem.id;
+
+  title.textContent = selectedItem.title;
+
+  if (typeof selectedItem.price === "number") {
+    price.textContent =
+      `価格：${selectedItem.price.toLocaleString("ja-JP")}円`;
+  } else {
+    price.textContent = "価格：情報なし";
+  }
+
+  const itemGenres = Array.isArray(selectedItem.genres)
+    ? selectedItem.genres
+    : [];
+
+  genre.textContent =
+    `ジャンル：${itemGenres.join(" / ")}`;
+
+  message.textContent = "";
+
+  productImage.src = selectedItem.image;
+  productImage.alt = selectedItem.title;
+
+  productLink.href = selectedItem.url;
+  productLink.hidden = false;
+
+  randomButton.textContent = "別の作品を見る";
+}
+
+async function showRandomItem() {
   randomButton.disabled = true;
   product.classList.add("fade-out");
 
-  setTimeout(() => {
-    const filteredItems = getFilteredItems();
+  try {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 250);
+    });
 
-    if (filteredItems.length === 0) {
-      title.textContent = "該当する作品がありません";
+    let selectedItem;
+
+    if (!hasActiveFilters()) {
+      selectedItem = await fetchRandomItemFromApi();
+    } else {
+      const filteredItems = getFilteredItems();
+
+      if (filteredItems.length === 0) {
+        title.textContent = "該当する作品がありません";
+        price.textContent = "";
+        genre.textContent = "";
+
+        message.textContent =
+          "条件を変更して、もう一度お試しください。";
+
+        productImage.src =
+          "https://placehold.co/1280x720/f3eadc/594d40?text=No+Items";
+
+        productImage.alt =
+          "該当する作品がありません";
+
+        productLink.hidden = true;
+
+        return;
+      }
+
+      do {
+        const randomNumber = Math.floor(
+          Math.random() * filteredItems.length
+        );
+
+        selectedItem = filteredItems[randomNumber];
+      } while (
+        selectedItem.id === lastItemId &&
+        filteredItems.length > 1
+      );
+    }
+
+    displayItem(selectedItem);
+  } catch (error) {
+    console.error("作品の取得に失敗しました:", error);
+
+    const fallbackItems = getFilteredItems();
+
+    if (fallbackItems.length === 0) {
+      title.textContent = "作品を取得できませんでした";
       price.textContent = "";
       genre.textContent = "";
 
       message.textContent =
-        "条件を変更して、もう一度お試しください。";
-
-      productImage.src =
-        "https://placehold.co/1280x720/f3eadc/594d40?text=No+Items";
-
-      productImage.alt =
-        "該当する作品がありません";
+        "時間をおいて、もう一度お試しください。";
 
       productLink.hidden = true;
+    } else {
+      let fallbackItem;
 
-      product.classList.remove("fade-out");
-      randomButton.disabled = false;
+      do {
+        const randomNumber = Math.floor(
+          Math.random() * fallbackItems.length
+        );
 
-      return;
-    }
-
-    let selectedItem;
-
-    do {
-      const randomNumber = Math.floor(
-        Math.random() * filteredItems.length
+        fallbackItem = fallbackItems[randomNumber];
+      } while (
+        fallbackItem.id === lastItemId &&
+        fallbackItems.length > 1
       );
 
-      selectedItem = filteredItems[randomNumber];
-    } while (
-      selectedItem.id === lastItemId &&
-      filteredItems.length > 1
-    );
+      displayItem(fallbackItem);
 
-    lastItemId = selectedItem.id;
-
-    title.textContent = selectedItem.title;
-
-    price.textContent =
-      `価格：${selectedItem.price.toLocaleString("ja-JP")}円`;
-
-    genre.textContent =
-      `ジャンル：${selectedItem.genres.join(" / ")}`;
-
-    message.textContent = "";
-
-    productImage.src = selectedItem.image;
-    productImage.alt = selectedItem.title;
-
-    productLink.href = selectedItem.url;
-    productLink.hidden = false;
-
-    randomButton.textContent = "別の作品を見る";
-
+      message.textContent =
+        "通信エラーのため、登録済み作品から表示しています。";
+    }
+  } finally {
     product.classList.remove("fade-out");
     randomButton.disabled = false;
-  }, 250);
+  }
 }
 
 randomButton.addEventListener("click", showRandomItem);
