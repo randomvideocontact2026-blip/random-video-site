@@ -460,7 +460,3 @@ function updateFilterLinks() {
 }
 
 updateFilterLinks();
-
-if (selectedTag) {
-  showRandomItem();
-}

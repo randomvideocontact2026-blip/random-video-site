@@ -240,7 +240,7 @@ button:disabled {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  object-fit: cover;
+  object-fit: contain;
   border: 1px solid #8d7c68;
   background: #e4d7c3;
 }

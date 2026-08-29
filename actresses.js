@@ -14,7 +14,7 @@ ageConfirmButton.addEventListener("click", () => {
 
   ageGate.hidden = true;
   mainContent.hidden = false;
-}); 
+});
 
 const actressSearchInput = document.getElementById("actressSearchInput");
 const actressResults = document.getElementById("actressResults");
@@ -31,10 +31,25 @@ const nav2dLink = document.getElementById("nav2dLink");
 const navVrLink = document.getElementById("navVrLink");
 const typeIndicator = document.getElementById("typeIndicator");
 
-if (typeFromUrl === "2d" || typeFromUrl === "vr") {
-  navTagsLink.href = `tags.html?type=${typeFromUrl}`;
-  navActressesLink.href = `actresses.html?type=${typeFromUrl}`;
+const navParams = new URLSearchParams();
+
+if (tagFromUrl) {
+  navParams.set("tag", tagFromUrl);
 }
+
+if (typeFromUrl === "2d" || typeFromUrl === "vr") {
+  navParams.set("type", typeFromUrl);
+}
+
+const navQuery = navParams.toString();
+
+navTagsLink.href = navQuery
+  ? `tags.html?${navQuery}`
+  : "tags.html";
+
+navActressesLink.href = navQuery
+  ? `actresses.html?${navQuery}`
+  : "actresses.html";
 
 function updateTypeDisplay() {
   navAllLink.classList.remove("active-type");
@@ -71,7 +86,7 @@ const allActresses = [
   )
 ].sort((a, b) => a.localeCompare(b, "ja"));
 
-function showActressResults(keyword = "") {
+async function showActressResults(keyword = "") {
   actressResults.innerHTML = "";
 
   const trimmedKeyword = keyword.trim();
@@ -81,41 +96,62 @@ function showActressResults(keyword = "") {
     return;
   }
 
-  const matchedActresses = allActresses.filter(actress =>
-    actress.includes(trimmedKeyword)
-  );
+  try {
+    const apiUrl = new URL(
+      "https://issaku-ichie-api.randomvideo-contact2026.workers.dev/"
+    );
 
-  if (matchedActresses.length === 0) {
+    apiUrl.searchParams.set("actresses", trimmedKeyword);
+
+    const response = await fetch(apiUrl.toString(), {
+      method: "GET",
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `女優検索APIエラー: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+    const matchedActresses = data.actresses ?? [];
+
+    if (matchedActresses.length === 0) {
+      const message = document.createElement("p");
+      message.textContent = "該当する女優が見つかりません。";
+      actressResults.appendChild(message);
+      return;
+    }
+
+    matchedActresses.forEach((actress) => {
+      const link = document.createElement("a");
+
+      const params = new URLSearchParams();
+
+      params.set("actress", actress.name);
+
+      if (tagFromUrl) {
+        params.set("tag", tagFromUrl);
+      }
+
+      if (typeFromUrl === "2d" || typeFromUrl === "vr") {
+        params.set("type", typeFromUrl);
+      }
+
+      link.href = `index.html?${params.toString()}`;
+      link.textContent = actress.name;
+
+      actressResults.appendChild(link);
+    });
+  } catch (error) {
+    console.error("女優検索に失敗しました:", error);
+
     const message = document.createElement("p");
-    message.textContent = "該当する女優が見つかりません。";
+    message.textContent = "女優検索に失敗しました。";
     actressResults.appendChild(message);
-    return;
   }
-
-  matchedActresses.forEach(actress => {
-    const link = document.createElement("a");
-
-    const params = new URLSearchParams();
-
-    params.set("actress", actress);
-
-    if (tagFromUrl) {
-      params.set("tag", tagFromUrl);
-    }
-
-    if (typeFromUrl === "2d" || typeFromUrl === "vr") {
-      params.set("type", typeFromUrl);
-    }
-
-
-
-    link.href = `index.html?${params.toString()}`;
-    link.textContent = actress;
-
-    actressResults.appendChild(link);
-  });
 }
-
 actressSearchInput.addEventListener("input", () => {
   showActressResults(actressSearchInput.value);
 });
