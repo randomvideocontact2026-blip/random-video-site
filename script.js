@@ -12,9 +12,7 @@ const productImage = document.querySelector("#productImage");
 const productLink = document.querySelector("#productLink");
 const product = document.querySelector(".product");
 
-const priceSelect = document.querySelector("#priceSelect");
 const resetButton = document.querySelector("#resetButton");
-const resultCount = document.querySelector("#resultCount");
 
 const selectedTagName = document.querySelector("#selectedTagName");
 const tagSelectLink = document.querySelector("#tagSelectLink");
@@ -180,49 +178,6 @@ function updateSelectedActressDisplay() {
   }
 }
 
-function getFilteredItems() {
-  const selectedPrice = priceSelect.value;
-
-  return items.filter((item) => {
-    const tagMatches =
-      selectedTag === null ||
-      item.genres.includes(selectedTag);
-
-    let priceMatches = false;
-
-    if (selectedPrice === "all") {
-      priceMatches = true;
-    } else if (selectedPrice === "under1000") {
-      priceMatches = item.price < 1000;
-    } else if (selectedPrice === "1000to1999") {
-      priceMatches =
-        item.price >= 1000 && item.price < 2000;
-    } else if (selectedPrice === "2000plus") {
-      priceMatches = item.price >= 2000;
-    }
-
-    const actressMatches =
-      selectedActress === null ||
-      (Array.isArray(item.actresses) &&
-        item.actresses.includes(selectedActress));
-
-    const typeMatches =
-      selectedType === null ||
-      item.type === selectedType;
-
-    return (
-      tagMatches &&
-      priceMatches &&
-      actressMatches &&
-      typeMatches
-    );
-  });
-}
-
-function updateResultCount() {
-  resultCount.hidden = true;
-}
-
 function resetProductDisplay() {
   productImage.src =
     "https://placehold.co/1280x720?text=Random+Video";
@@ -243,13 +198,26 @@ function hasActiveFilters() {
   return (
     selectedTag !== null ||
     selectedActress !== null ||
-    selectedType !== null ||
-    priceSelect.value !== "all"
+    selectedType !== null
   );
 }
 
 async function fetchRandomItemFromApi() {
-  const response = await fetch(RANDOM_ITEM_API_URL, {
+  const apiUrl = new URL(RANDOM_ITEM_API_URL);
+
+  if (selectedActress) {
+    apiUrl.searchParams.set("actress", selectedActress);
+  }
+
+  if (selectedTag) {
+    apiUrl.searchParams.set("genre", selectedTag);
+  }
+
+  if (selectedType) {
+    apiUrl.searchParams.set("type", selectedType);
+  }
+
+  const response = await fetch(apiUrl.toString(), {
     method: "GET",
     cache: "no-store",
   });
@@ -262,11 +230,10 @@ async function fetchRandomItemFromApi() {
 
   const data = await response.json();
 
-  if (!data.item) {
-    throw new Error("作品データが返されませんでした。");
-  }
-
-  return data.item;
+  return {
+    item: data.item ?? null,
+    confirmedEmpty: data.confirmedEmpty ?? null,
+  };
 }
 
 function displayItem(selectedItem) {
@@ -308,42 +275,25 @@ async function showRandomItem() {
       setTimeout(resolve, 250);
     });
 
-    let selectedItem;
+    const result = await fetchRandomItemFromApi();
 
-    if (!hasActiveFilters()) {
-      selectedItem = await fetchRandomItemFromApi();
-    } else {
-      const filteredItems = getFilteredItems();
+    const selectedItem = result.item;
+    const confirmedEmpty = result.confirmedEmpty;
 
-      if (filteredItems.length === 0) {
-        title.textContent = "該当する作品がありません";
-        price.textContent = "";
-        genre.textContent = "";
-
-        message.textContent =
-          "条件を変更して、もう一度お試しください。";
-
-        productImage.src =
-          "https://placehold.co/1280x720/f3eadc/594d40?text=No+Items";
-
-        productImage.alt =
-          "該当する作品がありません";
-
-        productLink.hidden = true;
-
-        return;
+    if (selectedItem === null) {
+      if (confirmedEmpty === true) {
+        title.textContent = "該当する作品は存在しません";
+      } else {
+        title.textContent = "作品を取得できませんでした";
       }
 
-      do {
-        const randomNumber = Math.floor(
-          Math.random() * filteredItems.length
-        );
+      price.textContent = "";
+      genre.textContent = "";
+      message.textContent = "";
 
-        selectedItem = filteredItems[randomNumber];
-      } while (
-        selectedItem.id === lastItemId &&
-        filteredItems.length > 1
-      );
+      productLink.hidden = true;
+
+      return;
     }
 
     displayItem(selectedItem);
@@ -388,16 +338,10 @@ async function showRandomItem() {
 
 randomButton.addEventListener("click", showRandomItem);
 
-priceSelect.addEventListener("change", () => {
-  lastItemId = null;
-  updateResultCount();
-});
-
 resetButton.addEventListener("click", () => {
   selectedTag = null;
   selectedActress = null;
   selectedType = null;
-  priceSelect.value = "all";
 
   if (selectedType) {
     window.history.replaceState(
@@ -416,7 +360,6 @@ resetButton.addEventListener("click", () => {
   updateTypeDisplay();
   updateFilterLinks();
   resetProductDisplay();
-  updateResultCount();
 });
 
 productImage.addEventListener("error", () => {
@@ -480,17 +423,43 @@ function updateFilterLinks() {
       ? `actresses.html?${actressQuery}`
       : "actresses.html";
 
-  if (selectedType) {
-    navTagsLink.href = `tags.html?type=${selectedType}`;
-    navActressesLink.href = `actresses.html?type=${selectedType}`;
-  } else {
-    navTagsLink.href = "tags.html";
-    navActressesLink.href = "actresses.html";
+  navTagsLink.href =
+    tagQuery ? `tags.html?${tagQuery}` : "tags.html";
+
+  navActressesLink.href =
+    actressQuery
+      ? `actresses.html?${actressQuery}`
+      : "actresses.html";
+
+  const typeParams = new URLSearchParams();
+
+  if (selectedTag) {
+    typeParams.set("tag", selectedTag);
   }
+
+  if (selectedActress) {
+    typeParams.set("actress", selectedActress);
+  }
+
+  const allQuery = typeParams.toString();
+
+  navAllLink.href =
+    allQuery
+      ? `index.html?${allQuery}`
+      : "index.html";
+
+  const twoDParams = new URLSearchParams(typeParams);
+  twoDParams.set("type", "2d");
+  nav2dLink.href =
+    `index.html?${twoDParams.toString()}`;
+
+  const vrParams = new URLSearchParams(typeParams);
+  vrParams.set("type", "vr");
+  navVrLink.href =
+    `index.html?${vrParams.toString()}`;
 }
 
 updateFilterLinks();
-updateResultCount();
 
 if (selectedTag) {
   showRandomItem();

@@ -35,19 +35,23 @@ const navVrLink = document.getElementById("navVrLink");
 const typeIndicator = document.getElementById("typeIndicator");
 
 
-// 2D / VR に応じて対象作品を絞る
-const targetItems =
-  typeFromUrl === "2d" || typeFromUrl === "vr"
-    ? items.filter((item) => item.type === typeFromUrl)
-    : items;
+const GENRES_API_URL =
+  "https://issaku-ichie-api.randomvideo-contact2026.workers.dev/?genres=1";
 
+async function fetchGenres() {
+  const response = await fetch(GENRES_API_URL, {
+    method: "GET",
+    cache: "no-store",
+  });
 
-// 対象作品からタグ一覧を作る
-const tags = [
-  ...new Set(
-    targetItems.flatMap((item) => item.genres)
-  )
-].sort((a, b) => a.localeCompare(b, "ja"));
+  if (!response.ok) {
+    throw new Error(`ジャンル取得失敗: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  return data.genres ?? [];
+}
 
 
 // 2D / VR をページ移動時にも保持
@@ -96,30 +100,49 @@ function updateTypeDisplay() {
 }
 
 
-// タグを画面に表示
-tags.forEach((tag) => {
-  const tagLink = document.createElement("a");
+// APIからタグ一覧を取得して画面に表示
+async function displayTags() {
+  try {
+    const genres = await fetchGenres();
 
-  tagLink.textContent = tag;
+    const tags = genres
+      .map((genre) => genre.name)
+      .filter(Boolean)
+      .sort((a, b) => a.localeCompare(b, "ja"));
 
-  const params = new URLSearchParams();
+    tags.forEach((tag) => {
+      const tagLink = document.createElement("a");
 
-  params.set("tag", tag);
+      tagLink.textContent = tag;
 
-  if (actressFromUrl) {
-    params.set("actress", actressFromUrl);
+      const params = new URLSearchParams();
+
+      params.set("tag", tag);
+
+      if (actressFromUrl) {
+        params.set("actress", actressFromUrl);
+      }
+
+      if (typeFromUrl === "2d" || typeFromUrl === "vr") {
+        params.set("type", typeFromUrl);
+      }
+
+      tagLink.href =
+        `index.html?${params.toString()}`;
+
+      tagList.appendChild(tagLink);
+    });
+  } catch (error) {
+    console.error("タグ一覧の取得に失敗しました:", error);
+
+    tagList.textContent =
+      "タグ一覧を取得できませんでした。";
   }
-
-  if (typeFromUrl === "2d" || typeFromUrl === "vr") {
-    params.set("type", typeFromUrl);
-  }
-
-  tagLink.href =
-    `index.html?${params.toString()}`;
-
-  tagList.appendChild(tagLink);
-});
+}
 
 
 // 2D / VR 表示を更新
 updateTypeDisplay();
+
+// タグ一覧を表示
+displayTags();

@@ -211,31 +211,6 @@ button:disabled {
   background: #f7f0e5;
 }
 
-.price-filter {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-width: 0;
-  margin: 0;
-}
-
-#priceSelect {
-  min-width: 170px;
-  padding: 8px 12px;
-  border: 1px solid #8d7c68;
-  border-radius: 0;
-  font: inherit;
-  color: #2f2922;
-  background: #fffaf2;
-}
-
-#resultCount {
-  margin: 0;
-  line-height: 1.6;
-  white-space: nowrap;
-}
-
 .condition-reset {
   margin-top: 22px;
   padding-top: 18px;
@@ -512,22 +487,6 @@ button:disabled {
   width: 100%;
   text-align: center;
 }
-
-  .price-filter {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    width: 100%;
-  }
-
-  #priceSelect {
-    width: 100%;
-    min-width: 0;
-  }
-
-  #resultCount {
-    white-space: normal;
-  }
 
   .condition-reset {
     margin-top: 18px;

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>一作一会｜FANZA作品をランダムに探せるサイト</title>
 
-  <meta name="description" content="一作一会は、タグ、女優名、価格帯などの条件を指定してFANZA作品をランダムに探せる非公式サイトです。次に観る作品との偶然の出会いを楽しめます。">
+  <meta name="description" content="一作一会は、タグや女優名などの条件を指定してFANZA作品をランダムに探せる非公式サイトです。次に観る作品との偶然の出会いを楽しめます。">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -65,9 +65,8 @@
 
     <section class="site-introduction">
       <p>
-        タグ、女優名、価格帯などの条件から、FANZA作品をランダムに探せます。<br>
-        条件なしでは、FANZA Web APIの対象作品から表示します。<br>
-        絞り込み時は、登録済み作品から表示します。<br>
+        タグや女優名などの条件から、FANZA作品をランダムに探せます。<br>
+        条件なし・絞り込み時ともに、FANZA Web APIの対象作品から表示します。<br>
         当サイトはFANZAの非公式サイトです。
       </p>
     </section>
@@ -93,21 +92,6 @@
         <a id="actressSelectLink" href="actresses.html" class="filter-link">
           女優を選ぶ
         </a>
-      </div>
-
-      <div class="condition-row">
-        <div class="price-filter">
-          <label for="priceSelect">価格帯：</label>
-
-          <select id="priceSelect">
-            <option value="all">すべて</option>
-            <option value="under1000">1,000円未満</option>
-            <option value="1000to1999">1,000円〜1,999円</option>
-            <option value="2000plus">2,000円以上</option>
-          </select>
-        </div>
-
-        <p id="resultCount"></p>
       </div>
 
       <div class="condition-reset">
