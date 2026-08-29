@@ -114,7 +114,7 @@ let selectedTag = null;
 let selectedActress = null;
 let selectedType = null;
 
-if (tagFromUrl && tags.includes(tagFromUrl)) {
+if (tagFromUrl) {
   selectedTag = tagFromUrl;
 }
 if (actressFromUrl) {
