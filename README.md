@@ -1,6 +1,6 @@
-# 一作一会
+# FANZガチャ
 
-「一作一会」は、FANZA作品をランダムに表示する非公式サイトです。
+「FANZガチャ」は、FANZA作品をランダムに表示する非公式サイトです。
 
 ## 公開サイト
 
@@ -12,16 +12,17 @@ https://randomvideocontact2026-blip.github.io/random-video-site/
 - 2D・VRの切り替え
 - タグによる絞り込み
 - 女優名による絞り込み
-- 価格帯による絞り込み
 - FANZAの商品ページへのリンク
 
 ## 作品表示の仕組み
 
-条件を指定しない場合は、Cloudflare Workerを経由してFANZA Web APIへアクセスし、API対象作品の中からランダムに1作品を取得します。
+FANZガチャでは、Cloudflare Workerを経由してFANZA Web APIへアクセスし、対象作品の中からランダムに1作品を取得します。
 
-タグ、女優名、価格帯、2D・VRなどの条件を指定した場合は、`items.js`に登録されている作品から条件に合う作品を表示します。
+タグ、女優名、2D・VRなどの条件を指定した場合も、指定された条件をCloudflare Workerへ送り、条件に合うFANZA作品を検索します。
 
-Cloudflare Workerを利用することで、API IDとアフィリエイトIDを公開サイトのJavaScriptへ直接記載しない仕組みにしています。
+タグと女優はそれぞれ最大3件まで指定でき、複数指定した場合はすべての条件に該当する作品を検索します。
+
+Cloudflare Workerを利用することで、API IDやアフィリエイトIDなどの認証情報を公開サイトのJavaScriptへ直接記載しない仕組みにしています。
 
 ## データ更新
 
