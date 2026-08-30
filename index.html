@@ -48,11 +48,30 @@
         </a>
       </p>
       <div class="header-ad">
-        <a href="#" aria-label="広告">
-          <img src="https://placehold.co/728x90?text=Advertisement" alt="広告" class="header-ad-image">
-        </a>
+        <ins class="widget-banner"></ins>
       </div>
-      
+
+      <script>
+        const bannerScript = document.createElement("script");
+
+        const isMobile =
+          window.matchMedia("(max-width: 600px)").matches;
+
+        const bannerId = isMobile
+          ? "2028_300_250"
+          : "2028_728_90";
+
+        bannerScript.className = "widget-banner-script";
+
+        bannerScript.src =
+          "https://widget-view.dmm.co.jp/js/banner_placement.js" +
+          "?affiliate_id=randomfanza-003" +
+          `&banner_id=${bannerId}`;
+
+        document.querySelector(".header-ad")
+          .appendChild(bannerScript);
+      </script>
+
       <nav class="main-nav">
         <a href="index.html">トップ</a>
         <a id="navAllLink" href="index.html">共通</a>

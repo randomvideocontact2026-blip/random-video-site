@@ -888,8 +888,11 @@ button:disabled {
     margin: 12px 0 10px;
   }
 
-  .header-ad-image {
-    max-width: 100%;
+  .header-ad .widget-banner,
+  .header-ad .widget-banner a,
+  .header-ad .widget-banner img {
+    width: 300px !important;
+    max-width: 100% !important;
   }
 
   #tagList {
@@ -908,40 +911,53 @@ button:disabled {
   }
 
   #actressResults {
-  grid-template-columns: 1fr;
-}
+    grid-template-columns: 1fr;
+  }
 
-.actress-selection-panel {
-  padding: 14px;
-}
+  .actress-selection-panel {
+    padding: 14px;
+  }
 
-.actress-selection-actions {
-  display: grid;
-}
+  .actress-selection-actions {
+    display: grid;
+  }
 
-#applyActressesButton,
-#clearActressesButton {
-  width: 100%;
-}
+  #applyActressesButton,
+  #clearActressesButton {
+    width: 100%;
+  }
 }
 
 .header-ad {
+  display: flex;
+  justify-content: center;
+
   width: 100%;
   margin: 14px 0 12px;
-  text-align: center;
+
+  overflow: hidden;
 }
 
-.header-ad a {
-  display: inline-block;
-  width: 100%;
-  max-width: 100%;
-}
-
-.header-ad-image {
+.header-ad .widget-banner {
   display: block;
-  width: 100%;
-  max-width: 640px;
-  height: auto;
+
+  width: auto;
+  max-width: 100%;
+
+  margin: 0 auto;
+}
+
+.header-ad .widget-banner a {
+  display: block;
+  margin: 0 auto;
+}
+
+.header-ad .widget-banner img {
+  display: block;
+
+  max-width: 100% !important;
+  height: auto !important;
+
   margin: 0 auto;
 }
 
