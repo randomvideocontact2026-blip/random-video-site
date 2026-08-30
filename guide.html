@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>一作一会の使い方 | 一作一会</title>
+  <title>FANZガチャの使い方｜FANZガチャ</title>
 
-  <meta name="description" content="FANZA作品をランダムに探せるサイト「一作一会」の使い方を説明します。タグ、女優名、価格帯を指定して、条件に合う作品を探せます。">
+  <meta
+    name="description"
+    content="FANZA作品をランダムに探せる非公式サイト「FANZガチャ」の使い方を説明します。タグ、女優名、2D・VRなどの条件から作品を探せます。"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +18,13 @@
 <body>
   <div id="ageGate" class="age-gate">
     <div class="age-gate-content">
-      <p class="age-gate-site-name">一作一会</p>
+      <p class="age-gate-site-name">
+        <img
+          src="images/fanz-gacha-logo.png"
+          alt="FANZガチャ"
+          class="site-logo-image"
+        >
+      </p>
 
       <h1>年齢確認</h1>
 
@@ -42,10 +51,16 @@
   <main id="mainContent" class="container legal-page" hidden>
     <header>
       <p class="site-name">
-        <a href="index.html">一作一会</a>
+        <a href="index.html">
+          <img
+            src="images/fanz-gacha-logo.png"
+            alt="FANZガチャ"
+            class="site-logo-image"
+          >
+        </a>
       </p>
 
-      <h1>一作一会の使い方</h1>
+      <h1>FANZガチャの使い方</h1>
 
       <nav class="main-nav">
         <a href="index.html">トップ</a>
@@ -63,23 +78,37 @@
     </p>
 
     <section class="legal-content">
-      <h2>一作一会とは</h2>
+      <h2>FANZガチャとは</h2>
 
       <p>
-        一作一会は、タグ、女優名、価格帯などの条件を指定して、
-        条件に合う作品をランダムに探せるWebサービスです。
+        FANZガチャは、タグ、女優名、2D・VRなどの条件から、
+        FANZA作品をランダムに探せる非公式Webサービスです。
       </p>
 
       <p>
-        観たい作品を細かく検索するのではなく、
-        ある程度条件を絞ったうえで偶然表示された作品を楽しむことを目的としています。
+        観たい作品を細かく検索するだけではなく、
+        ある程度条件を絞ったうえで偶然表示された作品との出会いを楽しむことを目的としています。
       </p>
 
-      <p class="development-notice">
-        現在は一部の作品情報を掲載しています。掲載作品は順次追加予定です。
+      <p>
+        条件なしの場合も、条件を指定した場合も、
+        FANZA Web APIの対象作品から作品を表示します。
       </p>
 
-      <h2>1．タグを選ぶ</h2>
+
+      <h2>1．2D・VRを選ぶ</h2>
+
+      <p>
+        上部メニューから「共通」「2D」「VR」を選択できます。
+      </p>
+
+      <p>
+        「共通」では2D・VRの両方を対象にし、
+        「2D」では通常動画作品、「VR」ではVR作品を対象に作品を探します。
+      </p>
+
+
+      <h2>2．タグを選ぶ</h2>
 
       <p>
         トップページにある「タグを選ぶ」を押すと、
@@ -88,10 +117,11 @@
 
       <p>
         気になるタグを選ぶと、
-        そのタグに該当する作品だけが検索対象になります。
+        そのタグに該当する作品が検索対象になります。
       </p>
 
-      <h2>2．女優を選ぶ</h2>
+
+      <h2>3．女優を選ぶ</h2>
 
       <p>
         トップページにある「女優を選ぶ」を押すと、
@@ -100,26 +130,15 @@
 
       <p>
         女優名を入力すると候補が表示されます。
-        女優を選ぶと、その女優が出演している作品だけが検索対象になります。
+        女優を選ぶと、その女優が出演している作品が検索対象になります。
       </p>
 
       <p>
         タグと女優は同時に指定できます。
         たとえば、特定のタグに該当する作品の中から、
-        選択した女優の作品だけを探すこともできます。
+        選択した女優が出演している作品を探すこともできます。
       </p>
 
-      <h2>3．価格帯を選ぶ</h2>
-
-      <p>
-        トップページの価格帯から、
-        探したい作品の価格を指定できます。
-      </p>
-
-      <p>
-        現在は「すべて」「1,000円未満」「1,000円〜1,999円」
-        「2,000円以上」の4つから選択できます。
-      </p>
 
       <h2>4．作品を探す</h2>
 
@@ -129,15 +148,7 @@
       </p>
 
       <p>
-        対象作品が複数ある場合は、
-        直前に表示された作品と同じ作品が連続しないようにしています。
-      </p>
-
-      <h2>5．別の作品を探す</h2>
-
-      <p>
-        もう一度「作品を探す」ボタンを押すと、
-        同じ条件を使って別の作品を探せます。
+        条件を指定しなくても作品を探すことができます。
       </p>
 
       <p>
@@ -145,23 +156,33 @@
         該当する作品がないことを知らせる案内が表示されます。
       </p>
 
+
+      <h2>5．別の作品を見る</h2>
+
+      <p>
+        作品が表示されたあとに「別の作品を見る」を押すと、
+        選択中の条件を保ったまま別の作品をランダムに探せます。
+      </p>
+
+
       <h2>6．商品ページを確認する</h2>
 
       <p>
         作品が表示されたあとに「商品ページへ」を押すと、
-        その作品を取り扱っている商品ページへ移動できます。
+        FANZAの商品ページへ移動できます。
       </p>
 
       <p>
-        商品の価格、配信状況、作品内容などの詳細は、
+        価格、配信状況、作品内容などの詳細は、
         移動先の商品ページでご確認ください。
       </p>
+
 
       <h2>7．条件をリセットする</h2>
 
       <p>
         「条件をリセット」を押すと、
-        選択中のタグ、女優、価格帯がすべて初期状態に戻ります。
+        選択中のタグ、女優、2D・VRの条件を初期状態に戻せます。
       </p>
 
       <p>
@@ -171,7 +192,7 @@
 
     <footer class="site-footer">
       <nav class="footer-links">
-        <a href="concept.html">一作一会について</a>
+        <a href="concept.html">FANZガチャについて</a>
         <a href="about.html">運営者情報</a>
         <a href="privacy.html">プライバシーポリシー</a>
         <a href="contact.html">お問い合わせ</a>
@@ -182,11 +203,10 @@
       </p>
 
       <p class="copyright">
-        &copy; 2026 一作一会
+        &copy; 2026 FANZガチャ
       </p>
     </footer>
   </main>
-
 
   <script>
     const ageGate = document.getElementById("ageGate");
@@ -207,8 +227,6 @@
       mainContent.hidden = false;
     });
   </script>
-
-
 </body>
 
 </html>

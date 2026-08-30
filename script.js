@@ -14,16 +14,11 @@ const product = document.querySelector(".product");
 
 const resetButton = document.querySelector("#resetButton");
 
-const selectedTagName = document.querySelector("#selectedTagName");
-const tagSelectLink = document.querySelector("#tagSelectLink");
+const selectedTagName =
+  document.querySelector("#selectedTagName");
 
-const nav2dLink = document.querySelector("#nav2dLink");
-const navVrLink = document.querySelector("#navVrLink");
-const typeIndicator = document.querySelector("#typeIndicator");
-const navAllLink = document.querySelector("#navAllLink");
-
-const navTagsLink = document.querySelector("#navTagsLink");
-const navActressesLink = document.querySelector("#navActressesLink");
+const tagSelectLink =
+  document.querySelector("#tagSelectLink");
 
 const selectedActressName =
   document.querySelector("#selectedActressName");
@@ -31,9 +26,37 @@ const selectedActressName =
 const actressSelectLink =
   document.querySelector("#actressSelectLink");
 
-const ageGate = document.querySelector("#ageGate");
-const ageConfirmButton = document.querySelector("#ageConfirmButton");
-const mainContent = document.querySelector("#mainContent");
+const navAllLink =
+  document.querySelector("#navAllLink");
+
+const nav2dLink =
+  document.querySelector("#nav2dLink");
+
+const navVrLink =
+  document.querySelector("#navVrLink");
+
+const navTagsLink =
+  document.querySelector("#navTagsLink");
+
+const navActressesLink =
+  document.querySelector("#navActressesLink");
+
+const typeIndicator =
+  document.querySelector("#typeIndicator");
+
+const ageGate =
+  document.querySelector("#ageGate");
+
+const ageConfirmButton =
+  document.querySelector("#ageConfirmButton");
+
+const mainContent =
+  document.querySelector("#mainContent");
+
+
+// =========================
+// 登録済み作品チェック
+// =========================
 
 function isValidUrl(value) {
   try {
@@ -51,7 +74,9 @@ function validateItems() {
     const itemNumber = index + 1;
 
     if (!item.id) {
-      console.error(`作品${itemNumber}：idがありません`);
+      console.error(
+        `作品${itemNumber}：idがありません`
+      );
     } else if (usedIds.has(item.id)) {
       console.error(
         `作品${itemNumber}：id「${item.id}」が重複しています`
@@ -61,7 +86,9 @@ function validateItems() {
     }
 
     if (!item.title) {
-      console.error(`作品${itemNumber}：titleがありません`);
+      console.error(
+        `作品${itemNumber}：titleがありません`
+      );
     }
 
     if (typeof item.price !== "number") {
@@ -70,14 +97,19 @@ function validateItems() {
       );
     }
 
-    if (!Array.isArray(item.genres) || item.genres.length === 0) {
+    if (
+      !Array.isArray(item.genres) ||
+      item.genres.length === 0
+    ) {
       console.error(
         `作品${itemNumber}：genresは1個以上のタグを含む配列にしてください`
       );
     }
 
     if (!item.image) {
-      console.error(`作品${itemNumber}：imageがありません`);
+      console.error(
+        `作品${itemNumber}：imageがありません`
+      );
     } else if (!isValidUrl(item.image)) {
       console.error(
         `作品${itemNumber}：imageのURLが正しくありません`
@@ -85,7 +117,9 @@ function validateItems() {
     }
 
     if (!item.url) {
-      console.error(`作品${itemNumber}：urlがありません`);
+      console.error(
+        `作品${itemNumber}：urlがありません`
+      );
     } else if (!isValidUrl(item.url)) {
       console.error(
         `作品${itemNumber}：urlの形式が正しくありません`
@@ -96,91 +130,150 @@ function validateItems() {
 
 validateItems();
 
-const tags = [
-  ...new Set(
-    items.flatMap((item) =>
-      Array.isArray(item.genres) ? item.genres : []
-    )
-  )
-].sort((a, b) => a.localeCompare(b, "ja"));
 
-const urlParams = new URLSearchParams(window.location.search);
+// =========================
+// URLから条件を取得
+// =========================
 
-const tagFromUrl = urlParams.get("tag");
-const actressFromUrl = urlParams.get("actress");
-const typeFromUrl = urlParams.get("type");
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
 
-let selectedTag = null;
-let selectedActress = null;
+let selectedTags =
+  urlParams
+    .getAll("tag")
+    .filter(Boolean)
+    .slice(0, 3);
+
+let selectedActresses =
+  urlParams
+    .getAll("actress")
+    .filter(Boolean)
+    .slice(0, 3);
+
+const typeFromUrl =
+  urlParams.get("type");
+
 let selectedType = null;
 
-if (tagFromUrl) {
-  selectedTag = tagFromUrl;
-}
-if (actressFromUrl) {
-  selectedActress = actressFromUrl;
-}
-if (typeFromUrl === "2d" || typeFromUrl === "vr") {
+if (
+  typeFromUrl === "2d" ||
+  typeFromUrl === "vr"
+) {
   selectedType = typeFromUrl;
 }
 
-function updateTypeDisplay() {
-  navAllLink.classList.remove("active-type");
-  nav2dLink.classList.remove("active-type");
-  navVrLink.classList.remove("active-type");
 
-  typeIndicator.classList.remove("is-2d", "is-vr");
+// =========================
+// 2D / VR 表示
+// =========================
+
+function updateTypeDisplay() {
+  navAllLink.classList.remove(
+    "active-type"
+  );
+
+  nav2dLink.classList.remove(
+    "active-type"
+  );
+
+  navVrLink.classList.remove(
+    "active-type"
+  );
+
+  typeIndicator.classList.remove(
+    "is-2d",
+    "is-vr"
+  );
 
   if (selectedType === "2d") {
-    nav2dLink.classList.add("active-type");
+    nav2dLink.classList.add(
+      "active-type"
+    );
 
     typeIndicator.textContent =
       "現在：2D版を表示中";
 
-    typeIndicator.classList.add("is-2d");
-    typeIndicator.hidden = false;
+    typeIndicator.classList.add(
+      "is-2d"
+    );
+
   } else if (selectedType === "vr") {
-    navVrLink.classList.add("active-type");
+    navVrLink.classList.add(
+      "active-type"
+    );
 
     typeIndicator.textContent =
       "現在：VR版を表示中";
 
-    typeIndicator.classList.add("is-vr");
-    typeIndicator.hidden = false;
+    typeIndicator.classList.add(
+      "is-vr"
+    );
+
   } else {
-    navAllLink.classList.add("active-type");
+    navAllLink.classList.add(
+      "active-type"
+    );
 
     typeIndicator.textContent =
       "現在：2D / VR 共通版を表示中";
-
-    typeIndicator.classList.remove("is-2d", "is-vr");
-    typeIndicator.hidden = false;
   }
+
+  typeIndicator.hidden = false;
 }
+
+
+// =========================
+// 選択中タグ表示
+// =========================
 
 function updateSelectedTagDisplay() {
-  if (selectedTag) {
-    selectedTagName.textContent = selectedTag;
-    tagSelectLink.textContent = "タグを変更する";
+  if (selectedTags.length > 0) {
+    selectedTagName.textContent =
+      selectedTags.join(" / ");
+
+    tagSelectLink.textContent =
+      "タグを変更する";
   } else {
-    selectedTagName.textContent = "指定なし";
-    tagSelectLink.textContent = "タグを選ぶ";
+    selectedTagName.textContent =
+      "指定なし";
+
+    tagSelectLink.textContent =
+      "タグを選ぶ";
   }
 }
 
+
+// =========================
+// 選択中女優表示
+// =========================
+
 function updateSelectedActressDisplay() {
-  if (selectedActress) {
-    selectedActressName.textContent = selectedActress;
-    actressSelectLink.textContent = "女優を変更する";
+  if (selectedActresses.length > 0) {
+    selectedActressName.textContent =
+      selectedActresses.join(" / ");
+
+    actressSelectLink.textContent =
+      "女優を変更する";
   } else {
-    selectedActressName.textContent = "指定なし";
-    actressSelectLink.textContent = "女優を選ぶ";
+    selectedActressName.textContent =
+      "指定なし";
+
+    actressSelectLink.textContent =
+      "女優を選ぶ";
   }
 }
+
+
+// =========================
+// 作品表示リセット
+// =========================
 
 function resetProductDisplay() {
   productImage.src =
     "https://placehold.co/1280x720?text=Random+Video";
+
   productImage.alt = "作品画像";
 
   title.textContent =
@@ -191,36 +284,51 @@ function resetProductDisplay() {
   message.textContent = "";
 
   productLink.hidden = true;
-  randomButton.textContent = "作品を探す";
+
+  randomButton.textContent =
+    "作品を探す";
 }
 
-function hasActiveFilters() {
-  return (
-    selectedTag !== null ||
-    selectedActress !== null ||
-    selectedType !== null
-  );
-}
+
+// =========================
+// APIからランダム作品取得
+// =========================
 
 async function fetchRandomItemFromApi() {
-  const apiUrl = new URL(RANDOM_ITEM_API_URL);
+  const apiUrl =
+    new URL(RANDOM_ITEM_API_URL);
 
-  if (selectedActress) {
-    apiUrl.searchParams.set("actress", selectedActress);
-  }
+  selectedActresses.forEach(
+    (actress) => {
+      apiUrl.searchParams.append(
+        "actress",
+        actress
+      );
+    }
+  );
 
-  if (selectedTag) {
-    apiUrl.searchParams.set("genre", selectedTag);
-  }
+  selectedTags.forEach((tag) => {
+    apiUrl.searchParams.append(
+      "genre",
+      tag
+    );
+  });
 
   if (selectedType) {
-    apiUrl.searchParams.set("type", selectedType);
+    apiUrl.searchParams.set(
+      "type",
+      selectedType
+    );
   }
 
-  const response = await fetch(apiUrl.toString(), {
-    method: "GET",
-    cache: "no-store",
-  });
+  const response =
+    await fetch(
+      apiUrl.toString(),
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
 
   if (!response.ok) {
     throw new Error(
@@ -228,63 +336,149 @@ async function fetchRandomItemFromApi() {
     );
   }
 
-  const data = await response.json();
+  const data =
+    await response.json();
 
   return {
-    item: data.item ?? null,
-    confirmedEmpty: data.confirmedEmpty ?? null,
+    item:
+      data.item ?? null,
+
+    confirmedEmpty:
+      data.confirmedEmpty ?? null,
   };
 }
 
+
+// =========================
+// 通信エラー時のローカル絞り込み
+// =========================
+
+function getFilteredItems() {
+  return items.filter((item) => {
+    const itemGenres =
+      Array.isArray(item.genres)
+        ? item.genres
+        : [];
+
+    const itemActresses =
+      Array.isArray(item.actresses)
+        ? item.actresses
+        : [];
+
+    const matchesTags =
+      selectedTags.every(
+        (tag) =>
+          itemGenres.includes(tag)
+      );
+
+    const matchesActresses =
+      selectedActresses.every(
+        (actress) =>
+          itemActresses.includes(
+            actress
+          )
+      );
+
+    const matchesType =
+      !selectedType ||
+      item.type === selectedType;
+
+    return (
+      matchesTags &&
+      matchesActresses &&
+      matchesType
+    );
+  });
+}
+
+
+// =========================
+// 作品表示
+// =========================
+
 function displayItem(selectedItem) {
-  lastItemId = selectedItem.id;
+  lastItemId =
+    selectedItem.id;
 
-  title.textContent = selectedItem.title;
+  title.textContent =
+    selectedItem.title;
 
-  if (typeof selectedItem.price === "number") {
+  if (
+    typeof selectedItem.price ===
+    "number"
+  ) {
     price.textContent =
       `価格：${selectedItem.price.toLocaleString("ja-JP")}円`;
   } else {
-    price.textContent = "価格：情報なし";
+    price.textContent =
+      "価格：情報なし";
   }
 
-  const itemGenres = Array.isArray(selectedItem.genres)
-    ? selectedItem.genres
-    : [];
+  const itemGenres =
+    Array.isArray(selectedItem.genres)
+      ? selectedItem.genres
+      : [];
 
   genre.textContent =
     `ジャンル：${itemGenres.join(" / ")}`;
 
   message.textContent = "";
 
-  productImage.src = selectedItem.image;
-  productImage.alt = selectedItem.title;
+  productImage.src =
+    selectedItem.image;
 
-  productLink.href = selectedItem.url;
+  productImage.alt =
+    selectedItem.title;
+
+  productLink.href =
+    selectedItem.url;
+
   productLink.hidden = false;
 
-  randomButton.textContent = "別の作品を見る";
+  randomButton.textContent =
+    "別の作品を見る";
 }
+
+
+// =========================
+// 作品を探す
+// =========================
 
 async function showRandomItem() {
   randomButton.disabled = true;
-  product.classList.add("fade-out");
+
+  product.classList.add(
+    "fade-out"
+  );
 
   try {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 250);
-    });
+    await new Promise(
+      (resolve) => {
+        setTimeout(
+          resolve,
+          250
+        );
+      }
+    );
 
-    const result = await fetchRandomItemFromApi();
+    const result =
+      await fetchRandomItemFromApi();
 
-    const selectedItem = result.item;
-    const confirmedEmpty = result.confirmedEmpty;
+    const selectedItem =
+      result.item;
+
+    const confirmedEmpty =
+      result.confirmedEmpty;
 
     if (selectedItem === null) {
-      if (confirmedEmpty === true) {
-        title.textContent = "該当する作品は存在しません";
+      if (
+        confirmedEmpty === true
+      ) {
+        title.textContent =
+          "該当する作品は存在しません";
       } else {
-        title.textContent = "作品を取得できませんでした";
+        title.textContent =
+          "作品を取得できませんでした";
       }
 
       price.textContent = "";
@@ -297,13 +491,22 @@ async function showRandomItem() {
     }
 
     displayItem(selectedItem);
+
   } catch (error) {
-    console.error("作品の取得に失敗しました:", error);
+    console.error(
+      "作品の取得に失敗しました:",
+      error
+    );
 
-    const fallbackItems = getFilteredItems();
+    const fallbackItems =
+      getFilteredItems();
 
-    if (fallbackItems.length === 0) {
-      title.textContent = "作品を取得できませんでした";
+    if (
+      fallbackItems.length === 0
+    ) {
+      title.textContent =
+        "作品を取得できませんでした";
+
       price.textContent = "";
       genre.textContent = "";
 
@@ -311,152 +514,279 @@ async function showRandomItem() {
         "時間をおいて、もう一度お試しください。";
 
       productLink.hidden = true;
+
     } else {
       let fallbackItem;
 
       do {
-        const randomNumber = Math.floor(
-          Math.random() * fallbackItems.length
-        );
+        const randomNumber =
+          Math.floor(
+            Math.random() *
+            fallbackItems.length
+          );
 
-        fallbackItem = fallbackItems[randomNumber];
+        fallbackItem =
+          fallbackItems[
+            randomNumber
+          ];
+
       } while (
-        fallbackItem.id === lastItemId &&
+        fallbackItem.id ===
+          lastItemId &&
         fallbackItems.length > 1
       );
 
-      displayItem(fallbackItem);
+      displayItem(
+        fallbackItem
+      );
 
       message.textContent =
         "通信エラーのため、登録済み作品から表示しています。";
     }
+
   } finally {
-    product.classList.remove("fade-out");
+    product.classList.remove(
+      "fade-out"
+    );
+
     randomButton.disabled = false;
   }
 }
 
-randomButton.addEventListener("click", showRandomItem);
 
-resetButton.addEventListener("click", () => {
-  selectedTag = null;
-  selectedActress = null;
-  selectedType = null;
+// =========================
+// 条件URL生成
+// =========================
 
-  if (selectedType) {
-    window.history.replaceState(
-      {},
-      "",
-      `index.html?type=${selectedType}`
-    );
-  } else {
-    window.history.replaceState({}, "", "index.html");
-  }
-
-  lastItemId = null;
-
-  updateSelectedTagDisplay();
-  updateSelectedActressDisplay();
-  updateTypeDisplay();
-  updateFilterLinks();
-  resetProductDisplay();
-});
-
-productImage.addEventListener("error", () => {
-  productImage.src =
-    "https://placehold.co/1280x720/f3eadc/594d40?text=Image+Not+Found";
-
-  productImage.alt =
-    "画像を読み込めませんでした";
-});
-
-const ageConfirmed =
-  sessionStorage.getItem("ageConfirmed");
-
-if (ageConfirmed === "true") {
-  ageGate.hidden = true;
-  mainContent.hidden = false;
+function addSelectedTags(params) {
+  selectedTags.forEach(
+    (tag) => {
+      params.append(
+        "tag",
+        tag
+      );
+    }
+  );
 }
 
-ageConfirmButton.addEventListener("click", () => {
-  sessionStorage.setItem("ageConfirmed", "true");
+function addSelectedActresses(
+  params
+) {
+  selectedActresses.forEach(
+    (actress) => {
+      params.append(
+        "actress",
+        actress
+      );
+    }
+  );
+}
 
-  ageGate.hidden = true;
-  mainContent.hidden = false;
-});
 
-updateSelectedTagDisplay();
-updateSelectedActressDisplay();
-updateTypeDisplay();
+// =========================
+// 各リンクの条件保持
+// =========================
 
 function updateFilterLinks() {
-  const tagParams = new URLSearchParams();
 
-  if (selectedActress) {
-    tagParams.set("actress", selectedActress);
-  }
+  // タグ一覧
+  const tagParams =
+    new URLSearchParams();
+
+  addSelectedTags(tagParams);
+  addSelectedActresses(tagParams);
 
   if (selectedType) {
-    tagParams.set("type", selectedType);
+    tagParams.set(
+      "type",
+      selectedType
+    );
   }
 
-  const tagQuery = tagParams.toString();
+  const tagQuery =
+    tagParams.toString();
 
   tagSelectLink.href =
-    tagQuery ? `tags.html?${tagQuery}` : "tags.html";
+    tagQuery
+      ? `tags.html?${tagQuery}`
+      : "tags.html";
+
+  navTagsLink.href =
+    tagSelectLink.href;
 
 
-  const actressParams = new URLSearchParams();
+  // 女優検索
+  const actressParams =
+    new URLSearchParams();
 
-  if (selectedTag) {
-    actressParams.set("tag", selectedTag);
-  }
+  addSelectedTags(
+    actressParams
+  );
+
+  addSelectedActresses(
+    actressParams
+  );
 
   if (selectedType) {
-    actressParams.set("type", selectedType);
+    actressParams.set(
+      "type",
+      selectedType
+    );
   }
 
-  const actressQuery = actressParams.toString();
+  const actressQuery =
+    actressParams.toString();
 
   actressSelectLink.href =
     actressQuery
       ? `actresses.html?${actressQuery}`
       : "actresses.html";
 
-  navTagsLink.href =
-    tagQuery ? `tags.html?${tagQuery}` : "tags.html";
-
   navActressesLink.href =
-    actressQuery
-      ? `actresses.html?${actressQuery}`
-      : "actresses.html";
+    actressSelectLink.href;
 
-  const typeParams = new URLSearchParams();
 
-  if (selectedTag) {
-    typeParams.set("tag", selectedTag);
-  }
+  // 2D / VR
+  const typeParams =
+    new URLSearchParams();
 
-  if (selectedActress) {
-    typeParams.set("actress", selectedActress);
-  }
+  addSelectedTags(
+    typeParams
+  );
 
-  const allQuery = typeParams.toString();
+  addSelectedActresses(
+    typeParams
+  );
+
+
+  // 共通
+  const allQuery =
+    typeParams.toString();
 
   navAllLink.href =
     allQuery
       ? `index.html?${allQuery}`
       : "index.html";
 
-  const twoDParams = new URLSearchParams(typeParams);
-  twoDParams.set("type", "2d");
+
+  // 2D
+  const twoDParams =
+    new URLSearchParams(
+      typeParams
+    );
+
+  twoDParams.set(
+    "type",
+    "2d"
+  );
+
   nav2dLink.href =
     `index.html?${twoDParams.toString()}`;
 
-  const vrParams = new URLSearchParams(typeParams);
-  vrParams.set("type", "vr");
+
+  // VR
+  const vrParams =
+    new URLSearchParams(
+      typeParams
+    );
+
+  vrParams.set(
+    "type",
+    "vr"
+  );
+
   navVrLink.href =
     `index.html?${vrParams.toString()}`;
 }
 
+
+// =========================
+// 条件リセット
+// =========================
+
+resetButton.addEventListener(
+  "click",
+  () => {
+    selectedTags = [];
+    selectedActresses = [];
+    selectedType = null;
+
+    window.history.replaceState(
+      {},
+      "",
+      "index.html"
+    );
+
+    lastItemId = null;
+
+    updateSelectedTagDisplay();
+    updateSelectedActressDisplay();
+    updateTypeDisplay();
+    updateFilterLinks();
+    resetProductDisplay();
+  }
+);
+
+
+// =========================
+// 検索ボタン
+// =========================
+
+randomButton.addEventListener(
+  "click",
+  showRandomItem
+);
+
+
+// =========================
+// 画像エラー
+// =========================
+
+productImage.addEventListener(
+  "error",
+  () => {
+    productImage.src =
+      "https://placehold.co/1280x720/f3eadc/594d40?text=Image+Not+Found";
+
+    productImage.alt =
+      "画像を読み込めませんでした";
+  }
+);
+
+
+// =========================
+// 年齢確認
+// =========================
+
+const ageConfirmed =
+  sessionStorage.getItem(
+    "ageConfirmed"
+  );
+
+if (ageConfirmed === "true") {
+  ageGate.hidden = true;
+  mainContent.hidden = false;
+}
+
+ageConfirmButton.addEventListener(
+  "click",
+  () => {
+    sessionStorage.setItem(
+      "ageConfirmed",
+      "true"
+    );
+
+    ageGate.hidden = true;
+    mainContent.hidden = false;
+  }
+);
+
+
+// =========================
+// 初期表示
+// =========================
+
+updateSelectedTagDisplay();
+updateSelectedActressDisplay();
+updateTypeDisplay();
 updateFilterLinks();

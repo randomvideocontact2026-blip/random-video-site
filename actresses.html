@@ -2,108 +2,178 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>女優検索｜一作一会</title>
+  <title>FANZA女優検索｜FANZガチャ</title>
 
-    <meta name="description" content="一作一会の女優検索ページです。女優名から作品を探せます。">
+  <meta
+    name="description"
+    content="FANZガチャのFANZA女優検索ページです。最大3人まで女優を選び、条件に合うFANZA作品をランダムに探せます。"
+  >
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="ageGate" class="age-gate">
-        <div class="age-gate-content">
-            <p class="age-gate-site-name">一作一会</p>
+  <div id="ageGate" class="age-gate">
+    <div class="age-gate-content">
+      <p class="age-gate-site-name">
+        <img
+          src="images/fanz-gacha-logo.png"
+          alt="FANZガチャ"
+          class="site-logo-image"
+        >
+      </p>
 
-            <h1>年齢確認</h1>
+      <h1>年齢確認</h1>
 
-            <p>
-                このサイトは成人向け作品を取り扱っています。
-            </p>
+      <p>
+        このサイトは成人向け作品を取り扱っています。
+      </p>
 
-            <p>
-                18歳未満の方はご利用いただけません。
-            </p>
-            
-            <div class="age-gate-buttons">
-                <button id="ageConfirmButton" type="button">
-                    18歳以上です
-                </button>
+      <p>
+        18歳未満の方はご利用いただけません。
+      </p>
 
-                <a href="https://www.google.com/">
-                    18歳未満です
-                </a>
-            </div>
-        </div>
+      <div class="age-gate-buttons">
+        <button id="ageConfirmButton" type="button">
+          18歳以上です
+        </button>
+
+        <a href="https://www.google.com/">
+          18歳未満です
+        </a>
+      </div>
     </div>
+  </div>
 
-    <main id="mainContent" class="container legal-page" hidden>
 
-        <header>
-            <p class="site-name">
-                <a href="index.html">一作一会</a>
-            </p>
+  <main id="mainContent" class="container legal-page" hidden>
 
-            <h1>女優検索</h1>
+    <header>
+      <p class="site-name">
+        <a href="index.html">
+          <img
+            src="images/fanz-gacha-logo.png"
+            alt="FANZガチャ"
+            class="site-logo-image"
+          >
+        </a>
+      </p>
 
-            <nav class="main-nav">
-                <a href="index.html">トップ</a>
-                <a id="navAllLink" href="actresses.html">共通</a>
-                <a id="nav2dLink" href="actresses.html?type=2d">2D</a>
-                <a id="navVrLink" href="actresses.html?type=vr">VR</a>
-                <a id="navTagsLink" href="tags.html">タグ一覧</a>
-                <a id="navActressesLink" href="actresses.html">女優検索</a>
-                <a href="guide.html">使い方</a>
-            </nav>
+      <h1>女優検索</h1>
 
-            <p id="typeIndicator" class="type-indicator" hidden></p>
-        </header>
+      <nav class="main-nav">
+        <a href="index.html">トップ</a>
+        <a id="navAllLink" href="actresses.html">共通</a>
+        <a id="nav2dLink" href="actresses.html?type=2d">2D</a>
+        <a id="navVrLink" href="actresses.html?type=vr">VR</a>
+        <a id="navTagsLink" href="tags.html">タグ一覧</a>
+        <a id="navActressesLink" href="actresses.html">女優検索</a>
+        <a href="guide.html">使い方</a>
+      </nav>
 
-        <p class="affiliate-pr-notice">
-            <strong>PR</strong> 当サイトはアフィリエイト広告を利用しています。
+      <p
+        id="typeIndicator"
+        class="type-indicator"
+        hidden
+      ></p>
+    </header>
+
+
+    <p class="affiliate-pr-notice">
+      <strong>PR</strong>
+      当サイトはアフィリエイト広告を利用しています。
+    </p>
+
+
+    <section class="legal-content">
+
+      <p>
+        女優は最大3人まで選択できます。
+      </p>
+
+      <p>
+        複数選択した場合は、選択した女優全員が出演している作品を検索します。
+      </p>
+
+
+      <div class="actress-selection-panel">
+
+        <p class="actress-selection-title">
+          選択中の女優
+          <span id="selectedActressCount">0</span>
+          / 3
         </p>
 
-        <section class="legal-content">
+        <div id="selectedActresses">
+          <span class="no-selected-actresses">
+            まだ女優を選択していません。
+          </span>
+        </div>
 
-            <p>
-                女優名を入力して作品を探せます。
-            </p>
+        <div class="actress-selection-actions">
+          <button
+            id="applyActressesButton"
+            type="button"
+            disabled
+          >
+            この女優で作品を探す
+          </button>
 
-            <div class="actress-search">
-                <label for="actressSearchInput">
-                    女優名
-                </label>
+          <button
+            id="clearActressesButton"
+            type="button"
+          >
+            選択を解除
+          </button>
+        </div>
 
-                <input id="actressSearchInput" type="search" placeholder="女優名を入力" autocomplete="off">
+      </div>
 
-                <div id="actressResults"></div>
-            </div>
 
-        </section>
+      <div class="actress-search">
 
-        <footer class="site-footer">
-            <nav class="footer-links">
-                <a href="concept.html">一作一会について</a>
-                <a href="about.html">運営者情報</a>
-                <a href="privacy.html">プライバシーポリシー</a>
-                <a href="contact.html">お問い合わせ</a>
-            </nav>
+        <label for="actressSearchInput">
+          女優名
+        </label>
 
-            <p class="affiliate-notice">
-                当サイトはアフィリエイト広告を利用しています。
-            </p>
+        <input
+          id="actressSearchInput"
+          type="search"
+          placeholder="女優名を入力"
+          autocomplete="off"
+        >
 
-            <p class="copyright">
-                &copy; 2026 一作一会
-            </p>
-        </footer>
+        <div id="actressResults"></div>
 
-    </main>
+      </div>
 
-    <script src="items.js"></script>
-    <script src="actresses.js"></script>
+    </section>
+
+
+    <footer class="site-footer">
+      <nav class="footer-links">
+        <a href="concept.html">FANZガチャについて</a>
+        <a href="about.html">運営者情報</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+
+      <p class="affiliate-notice">
+        当サイトはアフィリエイト広告を利用しています。
+      </p>
+
+      <p class="copyright">
+        &copy; 2026 FANZガチャ
+      </p>
+    </footer>
+
+  </main>
+
+
+  <script src="actresses.js"></script>
 </body>
 
 </html>

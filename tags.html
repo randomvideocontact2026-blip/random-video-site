@@ -4,9 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>タグ一覧｜一作一会</title>
 
-  <meta name="description" content="一作一会のタグ一覧ページです。作品をタグから探せます。">
+  <title>FANZAタグ一覧｜FANZガチャ</title>
+
+  <meta
+    name="description"
+    content="FANZガチャのFANZAタグ一覧ページです。最大3つまでタグを選び、条件に合うFANZA作品をランダムに探せます。"
+  >
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,12 +18,18 @@
 <body>
   <div id="ageGate" class="age-gate">
     <div class="age-gate-content">
-      <p class="age-gate-site-name">一作一会</p>
+      <p class="age-gate-site-name">
+        <img
+          src="images/fanz-gacha-logo.png"
+          alt="FANZガチャ"
+          class="site-logo-image"
+        >
+      </p>
 
       <h1>年齢確認</h1>
 
       <p>
-        このサイトは成人向け作品を取り扱う予定です。
+        このサイトは成人向け作品を取り扱っています。
       </p>
 
       <p>
@@ -38,10 +48,17 @@
     </div>
   </div>
 
+
   <main id="mainContent" class="container" hidden>
     <header>
       <p class="site-name">
-        <a href="index.html">一作一会</a>
+        <a href="index.html">
+          <img
+            src="images/fanz-gacha-logo.png"
+            alt="FANZガチャ"
+            class="site-logo-image"
+          >
+        </a>
       </p>
 
       <h1>タグ一覧</h1>
@@ -56,24 +73,69 @@
         <a href="guide.html">使い方</a>
       </nav>
 
-      <p id="typeIndicator" class="type-indicator" hidden></p>
+      <p
+        id="typeIndicator"
+        class="type-indicator"
+        hidden
+      ></p>
     </header>
 
+
     <p class="affiliate-pr-notice">
-      <strong>PR</strong> 当サイトはアフィリエイト広告を利用しています。
+      <strong>PR</strong>
+      当サイトはアフィリエイト広告を利用しています。
     </p>
+
 
     <section class="tag-page">
       <p>
-        作品をタグから探せます。
+        タグは最大3つまで選択できます。
       </p>
+
+      <p>
+        複数選択した場合は、すべてのタグに該当する作品を検索します。
+      </p>
+
+
+      <div class="tag-selection-panel">
+        <p class="tag-selection-title">
+          選択中のタグ
+          <span id="selectedTagCount">0</span>
+          / 3
+        </p>
+
+        <div id="selectedTags">
+          <span class="no-selected-tags">
+            まだタグを選択していません。
+          </span>
+        </div>
+
+        <div class="tag-selection-actions">
+          <button
+            id="applyTagsButton"
+            type="button"
+            disabled
+          >
+            このタグで作品を探す
+          </button>
+
+          <button
+            id="clearTagsButton"
+            type="button"
+          >
+            選択を解除
+          </button>
+        </div>
+      </div>
+
 
       <div id="tagList"></div>
     </section>
 
+
     <footer class="site-footer">
       <nav class="footer-links">
-        <a href="concept.html">一作一会について</a>
+        <a href="concept.html">FANZガチャについて</a>
         <a href="about.html">運営者情報</a>
         <a href="privacy.html">プライバシーポリシー</a>
         <a href="contact.html">お問い合わせ</a>
@@ -84,12 +146,12 @@
       </p>
 
       <p class="copyright">
-        &copy; 2026 一作一会
+        &copy; 2026 FANZガチャ
       </p>
     </footer>
   </main>
 
-  <script src="items.js"></script>
+
   <script src="tags.js"></script>
 </body>
 
