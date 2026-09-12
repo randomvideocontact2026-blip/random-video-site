@@ -981,3 +981,49 @@ button:disabled {
   background: #222222;
   color: #ffffff;
 }
+
+/* =========================
+   年齢確認オーバーレイ
+========================= */
+
+.age-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 20px;
+
+  border: 0;
+  background: rgba(245, 245, 243, 0.98);
+}
+
+.age-gate-content {
+  width: min(720px, 100%);
+  padding: 32px;
+
+  border: 1px solid #d8d8d4;
+  background: #ffffff;
+
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .age-gate {
+    padding: 16px;
+  }
+
+  .age-gate-content {
+    padding: 24px 18px;
+  }
+}
+
+.age-gate[hidden] {
+  display: none;
+}
