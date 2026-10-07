@@ -30,3 +30,4 @@ Cloudflare Workerを利用することで、API IDやアフィリエイトIDな�
 
 ```powershell
 python update_items.py
+```
